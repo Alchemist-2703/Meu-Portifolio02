@@ -93,23 +93,23 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
               style={{
-                animation: 'fluidoFadeIn 1.5s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 15px #00ffff, 0 0 30px #00ffff' /* Customizar potência e cor aqui */ }}>
+                animation: 'fluidoFadeIn 3s ease-out forwards',
+               textShadow: '0 0 5px #fff, 0 0 15px #681c9, 0 0 30px #681c9' /* Customizar potência e cor aqui */ }}>
                  Lisa
               </h1>
 
               <h2
                 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
                 style={{
-                animation: 'fluidoFadeIn 1.5s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 15px #00ffff, 0 0 30px #00ffff' /* Customizar potência e cor aqui */
+                animation: 'fluidoFadeIn 3s ease-out forwards',
+               textShadow: '0 0 5px #fff, 0 0 15px #681c9, 0 0 30px #681c9' /* Customizar potência e cor aqui */
                }}
                > O Alquimista
               </h2>
 
               <p className="text-slate-200 text-lg md:text-xl px-4 pt-4"
                 style={{ 
-                animation: 'fluidoFadeIn 1.5s ease-out forwards',
+                animation: 'fluidoFadeIn 3s ease-out forwards',
                 animationDelay: '800ms',
                 textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)' /* Sombra escura para o vídeo */ }}> 
                 Quer me conhecer melhor e conhecer meus trabalhos?
