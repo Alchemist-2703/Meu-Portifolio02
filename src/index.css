@@ -235,3 +235,72 @@ html, body {
     overflow: hidden;
     touch-action: none; /* Desativa o puxão elástico do navegador */
 }
+
+
+/* PAINEL DE CONTROLO - Altere os valores aqui para mudar o site todo */
+:root {
+  --neon-cor: #681c9b;           /* Cor do efeito neon (Cyan, Verde, Vermelho, etc) */
+  --neon-potencia: 15px;         /* Alcance do brilho neon (maior = mais forte) */
+  --fade-velocidade: 1.5s;       /* Tempo do Fade-In (ex: 0.8s, 2s) */
+  --sombra-texto: rgba(0, 0, 0, 0.85); /* Cor e opacidade da sombra de fundo */
+  --sombra-potencia: 8px;        /* Intensidade da sombra de fundo para leitura */
+}
+
+/* Animação de Fade-In Fluida e Detalhada */
+@keyframes fluidoFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px); /* Começa ligeiramente abaixo */
+    filter: blur(5px);           /* Começa com um leve desfoque cinematográfico */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);    /* Sobe suavemente para a posição original */
+    filter: blur(0);
+  }
+}
+
+/* Classe Base para a Animação */
+.animacao-fade {
+  animation: fluidoFadeIn var(--fade-velocidade) ease-out forwards;
+}
+
+/* Delays para criar um efeito de cascata (um texto aparece depois do outro) */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 1.1s; }
+
+/* Estilo do Efeito Neon */
+.efeito-neon {
+  color: #ffffff; /* Texto sempre branco no centro para realçar o neon */
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px var(--neon-cor),
+    0 0 var(--neon-potencia) var(--neon-cor),
+    0 0 calc(var(--neon-potencia) * 2) var(--neon-cor);
+}
+
+/* Estilo de Sombreamento para Leitura (Vídeos Claros) */
+.sombra-leitura {
+  text-shadow: 
+    1px 1px var(--sombra-potencia) var(--sombra-texto),
+    -1px -1px var(--sombra-potencia) var(--sombra-texto),
+    1px -1px var(--sombra-potencia) var(--sombra-texto),
+    -1px 1px var(--sombra-potencia) var(--sombra-texto);
+}
+
+/* Contentor Principal para Alinhamento e Espaçamento */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* Centraliza horizontalmente */
+  justify-content: center;   /* Centraliza verticalmente se necessário */
+  text-align: center;        /* Alinha os textos ao centro */
+  gap: 15px;                /* Espaçamento padrão entre as linhas */
+}
+
+/* Espaçamento extra específico para a frase de baixo */
+.frase-chamada {
+  margin-top: 25px;         /* Empurra a frase mais para baixo */
+  font-size: 1.2rem;
+}

@@ -91,11 +91,27 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
         {secaoAtiva === 'inicio' && (
           <div className="text-center max-w-3xl mx-auto space-y-8 mb-16">
             <div className="space-y-4">
-              <h1 className="animar-titulo-home text-5xl md:text-7xl font-extrabold tracking-tight bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]">
-                Lisa
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
+              style={{
+                animation: 'fluidoFadeIn 1.5s ease-out forwards',
+               textShadow: '0 0 5px #fff, 0 0 15px #00ffff, 0 0 30px #00ffff' /* Customizar potência e cor aqui */ }}>
+                 Lisa
               </h1>
-              <p className="animar-titulo-home text-slate-400 text-lg md:text-xl"
-              style={{ animationDelay: '200ms' }}>
+
+              <h2
+                className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
+                style={{
+                animation: 'fluidoFadeIn 1.5s ease-out forwards',
+               textShadow: '0 0 5px #fff, 0 0 15px #00ffff, 0 0 30px #00ffff' /* Customizar potência e cor aqui */
+               }}
+               > O Alquimista
+              </h2>
+
+              <p className="text-slate-200 text-lg md:text-xl px-4 pt-4"
+                style={{ 
+                animation: 'fluidoFadeIn 1.5s ease-out forwards',
+                animationDelay: '800ms',
+                textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)' /* Sombra escura para o vídeo */ }}> 
                 Quer me conhecer melhor e conhecer meus trabalhos?
               </p>
             </div>
