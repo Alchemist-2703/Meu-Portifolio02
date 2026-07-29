@@ -44,7 +44,8 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
       loop 
       muted 
       playsInline 
-      className="w-full h-full object-cover scale-[1.15] origin-top opacity-01 filter contrast-110"
+      preload="auto"
+      className="w-full h-full object-cover scale-[1.15] origin-top opacity-01 filter contrast-100"
     >
       <source src={iconeFundo} type="video/mp4" />
     </video>
@@ -180,7 +181,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
         </div>
 
       {/* CONTAINER DO CARROSSEL - Alterar "gap-6" muda o espaçamento entre os cards */}
-      <div className="flex flex-row gap-6 overflow-x-auto pb-6 pt-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent w-full snap-x snap-mandatory animate-[slideLeft_0.8s_ease-out]"> 
+      <div className="flex flex-row gap-6 overflow-x-auto pb-6 pt-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent w-full snap-x snap-mandatory animate-[slideLeft_1.5s_ease-out]"> 
       
        {/* 🌟 LISTA DE MÚSICAS PERSONALIZADA (ARRAY DE OBJETOS) 
           Altere os textos, links das capas e links das plataformas diretamente aqui abaixo:
@@ -315,7 +316,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
       <div className="space-y-4">
         <button 
           onClick={() => setGavetaDisponiveis(!gavetaDisponiveis)}
-          className="w-full flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
         >
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00ffff]"></span>
@@ -330,8 +331,8 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               { id: "disp-1", nome: "Beat Aramaico", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
               { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
             ].map((beat, index) => (   
-              <div key={beat.id} 
-              className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-cyan-500/20 transition-all duration-300 relative overflow-hidden group"
+              <div key={beat.id}      
+              className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
               style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
                 
@@ -375,7 +376,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
       <div className="space-y-4">
         <button 
           onClick={() => setGavetaUsados(!gavetaUsados)}
-          className="w-full flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-slate-600/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-slate-600/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
         >
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
@@ -391,7 +392,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
             ].map((beat, index) => (
               <div key={beat.id} 
-                className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] opacity-40 transition-all duration-300 relative overflow-hidden" 
+                className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden" 
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="font-semibold text-slate-300 tracking-wide text-base line-through">{beat.nome}</div>
