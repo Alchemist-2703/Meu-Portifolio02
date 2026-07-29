@@ -19,6 +19,10 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
   // Estado para controlar qual subseção está ativa ("inicio", "producoes", "catalogo", "sets", "perfis")
   const [secaoAtiva, setSecaoAtiva] = useState('inicio')
 
+  // Estados para controlar a abertura das gavetas de "Disponíveis" e "Usados"
+  const [gavetaDisponiveis, setGavetaDisponiveis] = useState(false);
+  const [gavetaUsados, setGavetaUsados] = useState(false);
+
 
   // Lista de opções do menu para evitar repetição de código
   const menuOptions = [
@@ -40,7 +44,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
       loop 
       muted 
       playsInline 
-      className="w-full h-full object-cover scale-[1.15] origin-top opacity-60 filter contrast-110"
+      className="w-full h-full object-cover scale-[1.15] origin-top opacity-01 filter contrast-110"
     >
       <source src={iconeFundo} type="video/mp4" />
     </video>
@@ -91,37 +95,40 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
         {secaoAtiva === 'inicio' && (
           <div className="text-center max-w-3xl mx-auto space-y-8 mb-16">
             <div className="space-y-4">
-              <h1 className="neon-solido-pulsante text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
-              style={{
-                animation: 'fluidoFadeIn 3s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 10px #2388af, 0 0 30px #2388af' /* Customizar potência e cor aqui */ }}>
-                 Lisa
+              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-tight bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
+              style={{ animationDelay: '100ms, 100ms',
+                filter: 'drop-shadow(0 0 5px rgba(0,245,212,0.6)) drop-shadow(0 0 15px rgba(168,85,247,0.5))'
+              }}
+              >
+                Lisa
               </h1>
+            
 
-              <h2
-                className="neon-solido-pulsante text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
-                style={{
-                animation: 'fluidoFadeIn 3s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 10px #2388af, 0 0 30px #2388af' /* Customizar potência e cor aqui */
-               }}
-               > o alquimista
-              </h2>
+              <h3 className="neon-gradiente-alquimista text-5xl md:text-7xl font-extrabold tracking-tight bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
+                style={{animationDelay: '900ms, 900ms',
+                   filter: 'drop-shadow(0 0 5px rgba(249,115,22,0.6)) drop-shadow(0 0 15px rgba(220,38,38,0.5))'
+                }}
+                // Delay alto (1800ms) para aparecer só depois da frase já estar no ecrã
+            >
+              o alquimista
+            </h3>
 
-              <p className="text-slate-200 text-lg md:text-xl px-4 pt-4"
-                style={{ 
-                animation: 'fluidoFadeIn 3s ease-out forwards',
-                textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)' /* Sombra escura para o vídeo */ }}> 
-                Quer me conhecer melhor e conhecer meus trabalhos?
-              </p>
-            </div>
+            <h2 className="neon-gradiente-melhor text-slate-200 text-lg md:text-xl"
+              style={{ animationDelay: '300ms',
+              filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(224,255,255,0.6)) drop-shadow(0 0 30px rgba(224,255,255,0.3))'
 
+              }}>
+              Quer me conhecer melhor e conhecer meus trabalhos?
+            </h2>
+          </div>
+          
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {menuOptions.map((item, index) => (
-                <button 
-                  key={item.id} 
-                  onClick={() => setSecaoAtiva(item.id)} 
+                <button
+                  key={item.id}
+                  onClick={() => setSecaoAtiva(item.id)}
                   className="animar-botao-home p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-lg text-left shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
-                  style={{ animationDelay: `${400 + index * 100}ms` }}>
+                  style={{ animationDelay: `${500 + index * 200}ms` }}>
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-white lg:group-hover:text-opal-flash-cyan transition-colors">
                       {item.label}
@@ -131,7 +138,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                     </span>
                   </div>
                 </button>
-              ))}
+                ))}
             </div>
 
             {/* VÍDEO DO YOUTUBE EXCLUSIVO DA TELA INICIAL COM ESPAÇAMENTO */}
@@ -164,12 +171,12 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             {/* Cabeçalho */}
         <div className="space-y-2 cabecalho-fade-in"> 
            <p className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Produções</p> 
-           <p className="text-slate-400 text-sm md:text-base"
+           <p className="text-slate-250 text-sm md:text-base"
            style={{ 
               animationDelay: '800ms',
               animationDuration: '1.5s',
               textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
-            > Arraste para o lado para explorar os lançamentos musicais.</p> 
+            > Algumas de minhas produções.</p> 
         </div>
 
       {/* CONTAINER DO CARROSSEL - Alterar "gap-6" muda o espaçamento entre os cards */}
@@ -267,224 +274,164 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
 
        {/* SUBSEÇÃO: CATÁLOGO */}
       {secaoAtiva === 'catalogo' && (
-       <div className="space-y-2 cabecalho-fade-in">
-    
+  <div className="space-y-6 cabecalho-fade-in">
     {/* Cabeçalho */}
     <div className="space-y-2">
       <h2 className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Catálogo de Beats</h2>
-      <p className="text-slate-400">Ouça os instrumentais, navegue pela linha do tempo e garanta a sua produção exclusiva.</p>
+      <p className="text-slate-250 text-sm md:text-base"
+           style={{ 
+              animationDelay: '800ms',
+              animationDuration: '1.5s',
+              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
+            > Ouça os Beats e garanta a sua produção exclusiva.</p>
     </div>
 
     {/* PLAYER DE ÁUDIO INVISÍVEL */}
-    <audio 
-      id="global-audio-player"
-      preload="auto"
-      onTimeUpdate={(e) => {
-        const audio = e.currentTarget;
-        const progresso = (audio.currentTime / audio.duration) * 100 || 0;
-        
-        const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
-        const contador = document.getElementById(`tempo-${audio.dataset.beatId}`);
-        
-        if (barra) barra.style.width = `${progresso}%`;
-        if (contador) {
-          const minAtual = Math.floor(audio.currentTime / 60);
-          const segAtual = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-          const minTotal = Math.floor(audio.duration / 60) || 0;
-          const segTotal = Math.floor(audio.duration % 60).toString().padStart(2, '0') || '00';
-          contador.innerText = `${minAtual}:${segAtual} / ${minTotal}:${segTotal}`;
-        }
-      }}
-      onEnded={(e) => {
-        const audio = e.currentTarget;
-        const btn = document.getElementById(`btn-${audio.dataset.beatId}`);
-        if (btn) btn.innerText = "▶ Play";
-        const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
-        if (barra) barra.style.width = '0%';
-      }}
-    />
+    <audio id="global-audio-player" preload="auto" onTimeUpdate={(e) => {
+      const audio = e.currentTarget;
+      const progresso = (audio.currentTime / audio.duration) * 100 || 0;
+      const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
+      const contador = document.getElementById(`tempo-${audio.dataset.beatId}`);
+      if (barra) barra.style.width = `${progresso}%`;
+      if (contador) {
+        const minAtual = Math.floor(audio.currentTime / 60);
+        const segAtual = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+        const minTotal = Math.floor(audio.duration / 60) || 0;
+        const segTotal = Math.floor(audio.duration % 60).toString().padStart(2, '0') || '00';
+        contador.innerText = `${minAtual}:${segAtual} / ${minTotal}:${segTotal}`;
+      }
+    }} onEnded={(e) => {
+      const audio = e.currentTarget;
+      const btn = document.getElementById(`btn-${audio.dataset.beatId}`);
+      if (btn) btn.innerText = "▶ Play";
+      const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
+      if (barra) barra.style.width = '0%';
+    }} />
 
     {/* LAYOUT EM DUAS COLUNAS */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
       
-      {/* COLUNA 1: BEATS DISPONÍVEIS */}
+      {/* ==================== COLUNA 1: BEATS DISPONÍVEIS ==================== */}
       <div className="space-y-4">
-        <div className="animar-catalogo delay-cat-0">
-          <h3 className="text-xl font-bold text-cyan-400 flex items-center gap-2 mb-2">
-           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-           Beats Disponíveis
-          </h3>
-        </div>
-
-        {/* LISTA DE BEATS DISPONÍVEIS */}
-        {[
-          { id: "disp-1", nome: "Beat Aramaico", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
-          { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
-        ].map((beat, index) => (
-          /* bg-slate-900/05 garante 95%-99% de transparência mantendo a borda sólida */
-          <div key={beat.id} className="animar-catalogo p-4 bg-slate-800/10 border border-slate-800 rounded-xl space-y-3 backdrop-blur-xs"
-           style={{ animationDelay: `${200 + index * 200}ms` }}>
-            <div className="font-semibold text-white tracking-wide text-base">{beat.nome}</div>
-            
-
-
-
-            {/* LINHA DO TEMPO INTERATIVA (Ao clicar, avança ou retrocede o áudio) */}
-            <div 
-              onClick={(e) => {
-                const audio = document.getElementById('global-audio-player');
-                // Só altera o tempo se este beat específico for o que está carregado
-                if (audio && audio.dataset.beatId === beat.id && audio.duration) {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const cliqueX = e.clientX - rect.left; // Posição exata do clique dentro da barra
-                  const larguraTotal = rect.width;
-                  const novaPercentagem = cliqueX / larguraTotal;
-                  audio.currentTime = novaPercentagem * audio.duration;
-                }
-              }}
-              className="w-full h-3 bg-slate-800 rounded-full cursor-pointer relative flex items-center group"
-            >
-              <div id={`barra-${beat.id}`} className="h-full bg-cyan-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
-              {/* Marcador flutuante discreto no hover */}
-              <div className="absolute top-0 bottom-0 right-0 left-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-full pointer-events-none"></div>
-            </div>
-
-            {/* Linha de Controle */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-              <span id={`tempo-${beat.id}`} className="text-xs text-slate-500 font-mono">0:00 / 0:00</span>
-              
-              <div className="flex gap-2">
-                <button 
-                  id={`btn-${beat.id}`}
-                  onClick={() => {
-                    const audio = document.getElementById('global-audio-player');
-                    const btn = document.getElementById(`btn-${beat.id}`);
-                    
-                    if (audio.dataset.beatId === beat.id && !audio.paused) {
-                      audio.pause();
-                      btn.innerText = "▶ Play";
-                    } 
-                    else if (audio.dataset.beatId === beat.id && audio.paused) {
-                      audio.play().catch(err => console.log("Erro:", err));
-                      btn.innerText = "⏸ Pause";
-                    }
-                    else {
-                      if (audio.dataset.beatId) {
-                        const oldBtn = document.getElementById(`btn-${audio.dataset.beatId}`);
-                        if (oldBtn) oldBtn.innerText = "▶ Play";
-                        const oldBarra = document.getElementById(`barra-${audio.dataset.beatId}`);
-                        if (oldBarra) oldBarra.style.width = '0%';
-                      }
-                      audio.src = beat.arquivo;
-                      audio.dataset.beatId = beat.id;
-                      audio.load();
-                      audio.play().catch(err => console.log("Erro:", err));
-                      btn.innerText = "⏸ Pause";
-                    }
-                  }}
-                  className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer"
-                >
-                  ▶ Play
-                </button>
-
-                <a 
-                  href={`https://wa.me/5511959367015?text=Salve, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`}
-                  fallback-href="https://wa.me/5511959367015?text=Salve, tenho interesse no beat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer flex items-center"
-                >
-                  Tenho Interesse
-                </a>
-              </div>
-            </div>
+        <button 
+          onClick={() => setGavetaDisponiveis(!gavetaDisponiveis)}
+          className="w-full flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00ffff]"></span>
+            <span className="text-xl font-bold text-cyan-400 tracking-wide">Beats Disponíveis</span>
           </div>
-        ))}
+          <span className={`text-cyan-400 font-mono transition-transform duration-300 text-lg ${gavetaDisponiveis ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+
+        {gavetaDisponiveis && (
+          <div className="space-y-4 pt-1">
+            {[
+              { id: "disp-1", nome: "Beat Aramaico", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
+              { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
+            ].map((beat, index) => (   
+              <div key={beat.id} 
+              className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-cyan-500/20 transition-all duration-300 relative overflow-hidden group"
+              style={{ animationDelay: `${index * 150}ms` }}>
+                <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
+                
+                {/* LINHA DO TEMPO INTERATIVA */}
+                <div onClick={(e) => {
+                  const audio = document.getElementById('global-audio-player');
+                  if (audio && audio.dataset.beatId === beat.id && audio.duration) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const cliqueX = e.clientX - rect.left;
+                    audio.currentTime = (cliqueX / rect.width) * audio.duration;
+                  }
+                }} className="w-full h-3 bg-slate-800 rounded-full cursor-pointer relative flex items-center group">
+                  <div id={`barra-${beat.id}`} className="h-full bg-cyan-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                  <span id={`tempo-${beat.id}`} className="text-xs text-slate-500 font-mono">0:00 / 0:00</span>
+                  <div className="flex gap-2">
+                    <button id={`btn-${beat.id}`} onClick={() => {
+                      const audio = document.getElementById('global-audio-player');
+                      const btn = document.getElementById(`btn-${beat.id}`);
+                      if (audio.dataset.beatId === beat.id && !audio.paused) { audio.pause(); btn.innerText = "▶ Play"; }
+                      else if (audio.dataset.beatId === beat.id && audio.paused) { audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause"; }
+                      else {
+                        if (audio.dataset.beatId) {
+                          const oldBtn = document.getElementById(`btn-${audio.dataset.beatId}`); if (oldBtn) oldBtn.innerText = "▶ Play";
+                          const oldBarra = document.getElementById(`barra-${audio.dataset.beatId}`); if (oldBarra) oldBarra.style.width = '0%';
+                        }
+                        audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
+                      }
+                    }} className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                    <a href={`https://wa.me/5511999999999?text=Olá, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer flex items-center">Tenho Interesse</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* COLUNA 2: BEATS EM USO / VENDIDOS (99% TRANSPARENTE, APAGADO, COM LINHA NO TÍTULO E TIMELINE INTERATIVA) */}
+      {/* ==================== COLUNA 2: BEATS EM USO / VENDIDOS ==================== */}
       <div className="space-y-4">
-        <div className="animar-catalogo delay-cat-0">
-          <h3 className="text-xl font-bold text-slate-500 flex items-center gap-2 mb-2">
-           <span className="w-2 h-2 rounded-full bg-slate-600"></span>
-           Beats em Uso / Vendidos
-          </h3>
-        </div>
-
-        {/* LISTA DE BEATS EM USO */}
-        {[
-          { id: "uso-1", nome: "Beat BamBamBila - Dubplate NBDG", arquivo: "beats/em-uso/bam bam bila-2.mp3" },
-          { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
-        ].map((beat, index) => (
-          /* Mantido bg-slate-900/05 para transparência e opacity-50 para efeito apagado de esmaecimento */
-          <div key={beat.id} className="animar-catalogo p-4 bg-slate-800/10 border border-slate-800/40 rounded-xl space-y-3 opacity-50 backdrop-blur-xs"
-            style={{ animationDelay: `${200 + index * 200}ms` }}>
-            {/* Título mantendo o riscado de cancelamento line-through */}
-            <div className="font-semibold text-slate-400 tracking-wide text-base line-through">{beat.nome}</div>
-            
-            {/* LINHA DO TEMPO INTERATIVA PARA OS BEATS EM USO */}
-            <div 
-              onClick={(e) => {
-                const audio = document.getElementById('global-audio-player');
-                if (audio && audio.dataset.beatId === beat.id && audio.duration) {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const cliqueX = e.clientX - rect.left;
-                  const larguraTotal = rect.width;
-                  const novaPercentagem = cliqueX / larguraTotal;
-                  audio.currentTime = novaPercentagem * audio.duration;
-                }
-              }}
-              className="w-full h-3 bg-slate-950 rounded-full cursor-pointer relative flex items-center group"
-            >
-              <div id={`barra-${beat.id}`} className="h-full bg-slate-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
-              <div className="absolute top-0 bottom-0 right-0 left-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-full pointer-events-none"></div>
-            </div>
-
-            {/* Linha de Controle */}
-            <div className="flex items-center justify-between pt-1">
-              <span id={`tempo-${beat.id}`} className="text-xs text-slate-600 font-mono">0:00 / 0:00</span>
-              
-              <button 
-                id={`btn-${beat.id}`}
-                onClick={() => {
-                  const audio = document.getElementById('global-audio-player');
-                  const btn = document.getElementById(`btn-${beat.id}`);
-                  
-                  if (audio.dataset.beatId === beat.id && !audio.paused) {
-                    audio.pause();
-                    btn.innerText = "▶ Play";
-                  } 
-                  else if (audio.dataset.beatId === beat.id && audio.paused) {
-                    audio.play().catch(err => console.log("Erro:", err));
-                    btn.innerText = "⏸ Pause";
-                  }
-                  else {
-                    if (audio.dataset.beatId) {
-                      const oldBtn = document.getElementById(`btn-${audio.dataset.beatId}`);
-                      if (oldBtn) oldBtn.innerText = "▶ Play";
-                      const oldBarra = document.getElementById(`barra-${audio.dataset.beatId}`);
-                      if (oldBarra) oldBarra.style.width = '0%';
-
-                    }
-                    audio.src = beat.arquivo;
-                    audio.dataset.beatId = beat.id;
-                    audio.load(); // Força o carregamento do arquivo local também na coluna 2
-                    audio.play().catch(err => console.log("Erro ao tocar:", err));
-                    btn.innerText = "⏸ Pause";
-                  }
-                }}
-                className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer"
-              >
-                ▶ Play
-              </button>
-            </div>
+        <button 
+          onClick={() => setGavetaUsados(!gavetaUsados)}
+          className="w-full flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-slate-600/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+            <span className="text-xl font-bold text-slate-300 tracking-wide">Beats em Uso / Vendidos</span>
           </div>
-        ))}
+          <span className={`text-slate-500 font-mono transition-transform duration-300 text-lg ${gavetaUsados ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+
+        {gavetaUsados && (
+          <div className="space-y-4 pt-1">
+            {[
+              { id: "uso-1", nome: "Beat BamBamBila - Dubplate NBDG", arquivo: "beats/em-uso/bam bam bila-2.mp3" },
+              { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
+            ].map((beat, index) => (
+              <div key={beat.id} 
+                className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] opacity-40 transition-all duration-300 relative overflow-hidden" 
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className="font-semibold text-slate-300 tracking-wide text-base line-through">{beat.nome}</div>
+                
+                
+                <div onClick={(e) => {
+                  const audio = document.getElementById('global-audio-player');
+                  if (audio && audio.dataset.beatId === beat.id && audio.duration) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+                  }
+                }} className="w-full h-3 bg-slate-950 rounded-full cursor-pointer relative flex items-center group">
+                  <div id={`barra-${beat.id}`} className="h-full bg-slate-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
+                </div>
+                <div className="flex items-center justify-between pt-1">
+                  <span id={`tempo-${beat.id}`} className="text-xs text-slate-600 font-mono">0:00 / 0:00</span>
+                  <button id={`btn-${beat.id}`} onClick={() => {
+                    const audio = document.getElementById('global-audio-player');
+                    const btn = document.getElementById(`btn-${beat.id}`);
+                    if (audio.dataset.beatId === beat.id && !audio.paused) { audio.pause(); btn.innerText = "▶ Play"; }
+                    else if (audio.dataset.beatId === beat.id && audio.paused) { audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause"; }
+                    else {
+                      if (audio.dataset.beatId) {
+                        const oldBtn = document.getElementById(`btn-${audio.dataset.beatId}`); if (oldBtn) oldBtn.innerText = "▶ Play";
+                        const oldBarra = document.getElementById(`barra-${audio.dataset.beatId}`); if (oldBarra) oldBarra.style.width = '0%';
+                      }
+                      audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
+                    }
+                  }} className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
     </div>
   </div>
 )}
+
 
 
         {/* SUBSEÇÃO: SETS */}
@@ -493,7 +440,12 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
     {/* 1. SEÇÃO SUPERIOR: CARDS DOS SETS (Animação de cima para baixo) */}
     <div className="space-y-2 cabecalho-fade-in">
       <p  className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Sets</p>
-        <p className="text-slate-400">Sets Gravados e Galeria Fotográfica para Portfólio.</p>
+        <p className="text-slate-250 text-sm md:text-base"
+           style={{ 
+              animationDelay: '800ms',
+              animationDuration: '1.5s',
+              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
+            >Sets Gravados e Galeria Fotográfica para Portfólio.</p>
       </div>
 
       {/* Grid de Cards Menores (Altere o "gap-4" para mudar o espaçamento entre eles) */}
@@ -611,7 +563,12 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
        {/* Cabeçalho */}
      <div className="space-y-2 cabecalho-fade-in">  
         <p className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Perfis</p> 
-        <p className="text-slate-400">Entre em contato ou acompanhe meus trabalhos nas redes sociais.</p> 
+        <p className="text-slate-250 text-sm md:text-base"
+           style={{ 
+              animationDelay: '800ms',
+              animationDuration: '1.5s',
+              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
+            >Me encontre e acompanhe meus trabalhos nas redes.</p> 
        </div> 
 
       {/* GRID HORIZONTAL: Força 4 colunas deitadas no celular (grid-cols-4) com círculos menores */}
