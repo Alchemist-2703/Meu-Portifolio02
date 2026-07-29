@@ -236,22 +236,12 @@ html, body {
     touch-action: none; /* Desativa o puxão elástico do navegador */
 }
 
-
-/* PAINEL DE CONTROLO - Altere os valores aqui para mudar o site todo */
-:root {
-  --neon-cor: #681c9b;           /* Cor do efeito neon (Cyan, Verde, Vermelho, etc) */
-  --neon-potencia: 15px;         /* Alcance do brilho neon (maior = mais forte) */
-  --fade-velocidade: 1.5s;       /* Tempo do Fade-In (ex: 0.8s, 2s) */
-  --sombra-texto: rgba(0, 0, 0, 0.85); /* Cor e opacidade da sombra de fundo */
-  --sombra-potencia: 8px;        /* Intensidade da sombra de fundo para leitura */
-}
-
 /* Animação de Fade-In Fluida e Detalhada */
 @keyframes fluidoFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(10px); /* Começa ligeiramente abaixo */
-    filter: blur(5px);           /* Começa com um leve desfoque cinematográfico */
+    transform: translateY(5px); /* Começa ligeiramente abaixo */
+    filter: blur(2px);           /* Começa com um leve desfoque cinematográfico */
   }
   100% {
     opacity: 1;
@@ -264,21 +254,46 @@ html, body {
 .animacao-fade {
   animation: fluidoFadeIn var(--fade-velocidade) ease-out forwards;
 }
-
 /* Delays para criar um efeito de cascata (um texto aparece depois do outro) */
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.6s; }
 .delay-3 { animation-delay: 1.1s; }
 
-/* Estilo do Efeito Neon */
-.efeito-neon {
-  color: #ffffff; /* Texto sempre branco no centro para realçar o neon */
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 10px var(--neon-cor),
-    0 0 var(--neon-potencia) var(--neon-cor),
-    0 0 calc(var(--neon-potencia) * 2) var(--neon-cor);
+
+/* PAINEL DE CONTROLO - Altere os valores aqui para mudar o site todo */
+/* Definição das cores e potências do Neon */
+:root {
+  --neon-cor-solida: #2388af;  /* Altere aqui para mudar a cor do texto e do brilho */
+  --neon-velocidade-pulso: 2s; /* Tempo de cada ciclo da pulsação (ex: 1.5s, 3s) */
 }
+
+/* Animação que faz o neon pulsar suavemente */
+@keyframes pulsarNeon {
+  0%, 100% {
+    text-shadow: 
+      0 0 4px var(--neon-cor-solida),
+      0 0 12px var(--neon-cor-solida),
+      0 0 30px var(--neon-cor-solida);
+    opacity: 0.9;
+  }
+  50% {
+    text-shadow: 
+      0 0 8px var(--neon-cor-solida),
+      0 0 25px var(--neon-cor-solida),
+      0 0 55px var(--neon-cor-solida);
+    opacity: 1;
+  }
+}
+
+/* Classe que aplica a cor sólida e ativa a pulsação */
+.neon-solido-pulsante {
+  color: var(--neon-cor-solida) !important; /* Remove o centro branco e aplica a cor sólida */
+  animation-name: fluidoFadeIn, pulsarNeon;  /* Mantém o seu fade-in e adiciona o pulso */
+  animation-duration: 1.5s, var(--neon-velocidade-pulso);
+  animation-iteration-count: 1, infinite;   /* Fade-in corre 1 vez, pulsação corre para sempre */
+  animation-timing-function: ease-out, ease-in-out;
+}
+
 
 /* Estilo de Sombreamento para Leitura (Vídeos Claros) */
 .sombra-leitura {
@@ -296,7 +311,7 @@ html, body {
   align-items: center;      /* Centraliza horizontalmente */
   justify-content: center;   /* Centraliza verticalmente se necessário */
   text-align: center;        /* Alinha os textos ao centro */
-  gap: 15px;                /* Espaçamento padrão entre as linhas */
+  gap: 10px;                /* Espaçamento padrão entre as linhas */
 }
 
 /* Espaçamento extra específico para a frase de baixo */

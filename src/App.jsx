@@ -91,26 +91,25 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
         {secaoAtiva === 'inicio' && (
           <div className="text-center max-w-3xl mx-auto space-y-8 mb-16">
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
+              <h1 className="neon-solido-pulsante text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
               style={{
                 animation: 'fluidoFadeIn 3s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 15px #681c9, 0 0 30px #681c9' /* Customizar potência e cor aqui */ }}>
+               textShadow: '0 0 5px #fff, 0 0 10px #2388af, 0 0 30px #2388af' /* Customizar potência e cor aqui */ }}>
                  Lisa
               </h1>
 
               <h2
-                className="text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
+                className="neon-solido-pulsante text-5xl md:text-7xl font-extrabold tracking-tight text-white animate-fade-in"
                 style={{
                 animation: 'fluidoFadeIn 3s ease-out forwards',
-               textShadow: '0 0 5px #fff, 0 0 15px #681c9, 0 0 30px #681c9' /* Customizar potência e cor aqui */
+               textShadow: '0 0 5px #fff, 0 0 10px #2388af, 0 0 30px #2388af' /* Customizar potência e cor aqui */
                }}
-               > O Alquimista
+               > o alquimista
               </h2>
 
               <p className="text-slate-200 text-lg md:text-xl px-4 pt-4"
                 style={{ 
                 animation: 'fluidoFadeIn 3s ease-out forwards',
-                animationDelay: '800ms',
                 textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)' /* Sombra escura para o vídeo */ }}> 
                 Quer me conhecer melhor e conhecer meus trabalhos?
               </p>
@@ -165,7 +164,12 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             {/* Cabeçalho */}
         <div className="space-y-2 cabecalho-fade-in"> 
            <p className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Produções</p> 
-           <p className="text-slate-400 text-sm md:text-base">Arraste para o lado para explorar os lançamentos musicais.</p> 
+           <p className="text-slate-400 text-sm md:text-base"
+           style={{ 
+              animationDelay: '800ms',
+              animationDuration: '1.5s',
+              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
+            > Arraste para o lado para explorar os lançamentos musicais.</p> 
         </div>
 
       {/* CONTAINER DO CARROSSEL - Alterar "gap-6" muda o espaçamento entre os cards */}
