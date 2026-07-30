@@ -94,9 +94,9 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
 
         {/* SUBSEÇÃO: MENU PRINCIPAL / INÍCIO */}
         {secaoAtiva === 'inicio' && (
-          <div className="text-center max-w-3xl mx-auto space-y-8 mb-16">
-            <div className="space-y-4">
-              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-tight bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
+          <div className="text-center max-w-3xl mx-auto space-y-8 leading-[0.85]">
+            <div className="space-y-4">   
+              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
               style={{ animationDelay: '100ms, 100ms',
                 filter: 'drop-shadow(0 0 5px rgba(0,245,212,0.6)) drop-shadow(0 0 15px rgba(168,85,247,0.5))'
               }}
@@ -105,7 +105,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               </h1>
             
 
-              <h3 className="neon-gradiente-alquimista text-5xl md:text-7xl font-extrabold tracking-tight bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
+              <h3 className="neon-gradiente-alquimista text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
                 style={{animationDelay: '900ms, 900ms',
                    filter: 'drop-shadow(0 0 5px rgba(249,115,22,0.6)) drop-shadow(0 0 15px rgba(220,38,38,0.5))'
                 }}
