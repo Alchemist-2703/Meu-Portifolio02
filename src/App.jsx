@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 // Importações dos seus ficheiros locais de imagem:
 import iconeSoundcloud from './assets/soundcloud-logo.png'
@@ -31,6 +31,55 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
     { id: 'sets', label: 'Sets' },
     { id: 'perfis', label: 'Perfis' }
   ]
+
+  //Ação para controlar a mídia ativa e o beat atual
+  const [midiaAtiva, setMidiaAtiva] = useState(null); // 'video' | 'beat' | null
+  const [beatAtual, setBeatAtual] = useState(null);
+  const iframeYoutubeRef = useRef(null);
+  const audioBeatRef = useRef(null);
+
+  // Função para controlar a pausa do YouTube via postMessage
+  const pausarYoutube = () => {
+  if (iframeYoutubeRef.current) {
+    iframeYoutubeRef.current.contentWindow.postMessage(
+      '{"event":"command","func":"pauseVideo","args":""}',
+      '*');}};
+  const tocarYoutube = () => {
+  if (iframeYoutubeRef.current) {
+    iframeYoutubeRef.current.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      '*');}};
+
+  // Função para dar play em um Beat do catálogo
+  const darPlayNoBeat = (beat) => {
+  // 1. Se o vídeo do YouTube estiver rodando, pausa ele
+  pausarYoutube();
+
+  // 2. Toca o beat
+  if (audioBeatRef.current) {
+    if (beatAtual?.id === beat.id && midiaAtiva === 'beat') {
+      // Se clicar no mesmo beat que está tocando, pausa
+      audioBeatRef.current.pause();
+      setMidiaAtiva(null);
+    } else {
+      setBeatAtual(beat);
+      audioBeatRef.current.src = beat.audio;
+      audioBeatRef.current.play();
+      setMidiaAtiva('beat');
+    }
+  }
+};
+
+  // Função acionada quando o usuário clica para dar play no vídeo
+  const darPlayNoVideo = () => {
+  // Se tiver um beat tocando, pausa o beat
+  if (audioBeatRef.current) {
+    audioBeatRef.current.pause();
+  }
+  tocarYoutube();
+  setMidiaAtiva('video');
+};    
+
 
   return (
     // ADAPTADO: Substituído o fundo sólido 'bg-black' pelo gradiente profundo e animado da Opala
@@ -93,8 +142,8 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
          {/* Verifique se esta tag existe antes do fim do arquivo */}
 
         {/* SUBSEÇÃO: MENU PRINCIPAL / INÍCIO */}
-        {secaoAtiva === 'inicio' && (
-          <div className="text-center max-w-3xl mx-auto space-y-8 leading-[0.85]">
+        
+          <div className={secaoAtiva === 'inicio' ? "text-center max-w-3xl mx-auto space-y-8 leading-[0.85]" : "hidden"}>
             <div className="space-y-4">   
               <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
               style={{ animationDelay: '100ms, 100ms',
@@ -148,8 +197,9 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             <div className="w-full max-w-xl mx-auto mt-10 rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-slate-900/50 p-2 backdrop-blur-md">
               <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                 <iframe 
+                ref={iframeYoutubeRef}
                   className="w-full h-full"
-                  src={`https://www.youtube.com/embed/qHShURxB1vk?si=kymsJgYXNTC8_XSm${aceitouCookies ? '&autoplay=1&mute=1' : ''}`} 
+                  src={`https://www.youtube.com/embed/qHShURxB1vk?enablejsapi=1${aceitouCookies ? '&autoplay=1&mute=1' : ''}`} 
                   title="YouTube video player" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -163,7 +213,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             </div>
 
           </div>
-        )}
+        
 
         {/* SUBSEÇÃO: PRODUÇÕES */} 
         {secaoAtiva === 'producoes' && ( 
@@ -274,8 +324,8 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
 
 
        {/* SUBSEÇÃO: CATÁLOGO */}
-      {secaoAtiva === 'catalogo' && (
-  <div className="space-y-6 cabecalho-fade-in">
+      
+  <div className={secaoAtiva === 'catalogo' ?"space-y-6 cabecalho-fade-in" : "hidden"}>
     {/* Cabeçalho */}
     <div className="space-y-2">
       <h2 className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Catálogo de Beats</h2>
@@ -287,27 +337,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             > Ouça os Beats e garanta a sua produção exclusiva.</p>
     </div>
 
-    {/* PLAYER DE ÁUDIO INVISÍVEL */}
-    <audio id="global-audio-player" preload="auto" onTimeUpdate={(e) => {
-      const audio = e.currentTarget;
-      const progresso = (audio.currentTime / audio.duration) * 100 || 0;
-      const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
-      const contador = document.getElementById(`tempo-${audio.dataset.beatId}`);
-      if (barra) barra.style.width = `${progresso}%`;
-      if (contador) {
-        const minAtual = Math.floor(audio.currentTime / 60);
-        const segAtual = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-        const minTotal = Math.floor(audio.duration / 60) || 0;
-        const segTotal = Math.floor(audio.duration % 60).toString().padStart(2, '0') || '00';
-        contador.innerText = `${minAtual}:${segAtual} / ${minTotal}:${segTotal}`;
-      }
-    }} onEnded={(e) => {
-      const audio = e.currentTarget;
-      const btn = document.getElementById(`btn-${audio.dataset.beatId}`);
-      if (btn) btn.innerText = "▶ Play";
-      const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
-      if (barra) barra.style.width = '0%';
-    }} />
+    
 
     {/* LAYOUT EM DUAS COLUNAS */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
@@ -351,6 +381,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                   <span id={`tempo-${beat.id}`} className="text-xs text-slate-500 font-mono">0:00 / 0:00</span>
                   <div className="flex gap-2">
                     <button id={`btn-${beat.id}`} onClick={() => {
+                      darPlayNoBeat(beat);
                       const audio = document.getElementById('global-audio-player');
                       const btn = document.getElementById(`btn-${beat.id}`);
                       if (audio.dataset.beatId === beat.id && !audio.paused) { audio.pause(); btn.innerText = "▶ Play"; }
@@ -410,6 +441,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                 <div className="flex items-center justify-between pt-1">
                   <span id={`tempo-${beat.id}`} className="text-xs text-slate-600 font-mono">0:00 / 0:00</span>
                   <button id={`btn-${beat.id}`} onClick={() => {
+                    darPlayNoBeat(beat);
                     const audio = document.getElementById('global-audio-player');
                     const btn = document.getElementById(`btn-${beat.id}`);
                     if (audio.dataset.beatId === beat.id && !audio.paused) { audio.pause(); btn.innerText = "▶ Play"; }
@@ -431,7 +463,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
 
     </div>
   </div>
-)}
+
 
 
 
@@ -722,7 +754,9 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
        </div>
       )}
       </main>
-
+        
+      {/* Elemento de Áudio Global para os Beats */}
+      
 
       {/* 🍪 BANNER DE COOKIES (Fixo na parte inferior e independente das subseções) */}
       {!aceitouCookies && (
@@ -756,6 +790,31 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
           </div>
         </div>
       )}
+      <audio 
+        id="global-audio-player" 
+        className="hidden" 
+        preload="auto"
+        onTimeUpdate={(e) => {
+          const audio = e.currentTarget;
+          const progresso = (audio.currentTime / audio.duration) * 100 || 0;
+          const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
+          const contador = document.getElementById(`tempo-${audio.dataset.beatId}`);
+          if (barra) barra.style.width = `${progresso}%`;
+          if (contador) {
+            const minAtual = Math.floor(audio.currentTime / 60);
+            const segAtual = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+            const minTotal = Math.floor(audio.duration / 60) || 0;
+            const segTotal = Math.floor(audio.duration % 60).toString().padStart(2, '0') || '00';
+            contador.innerText = `${minAtual}:${segAtual} / ${minTotal}:${segTotal}`;
+          }
+        }} 
+        onEnded={(e) => {
+          const audio = e.currentTarget;
+          const btn = document.getElementById(`btn-${audio.dataset.beatId}`);
+          if (btn) btn.innerText = "▶ Play";
+          const barra = document.getElementById(`barra-${audio.dataset.beatId}`);
+          if (barra) barra.style.width = '0%';
+        }}/>
 
     </div>
   );
