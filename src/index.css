@@ -298,14 +298,33 @@ html, body {
 /* Classes de Aplicação */
 .neon-gradiente-lisa {
   opacity: 0;
-  --brilho-neon: drop-shadow(0 0 5px rgba(0,245,212,0.6)) drop-shadow(0 0 15px rgba(168,85,247,0.5));
-  animation: esfumadoFadeIn 2s ease-out forwards;
+  background: linear-gradient(90deg, #A9FFF7, #a855f7, #581c87, #7B2CBF, #A9FFF7);
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  
+  /* Mantém o filtro neon original e aplica a animação esfumaçada + movimento do gradiente */
+  filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.6)) drop-shadow(0 0 15px rgba(88, 28, 135, 0.7));
+  animation: 
+    esfumadoFadeIn 2s ease-out forwards,
+    gradienteInfinito 4s ease-in-out infinite alternate;
 }
 
 .neon-gradiente-alquimista {
   opacity: 0;
-  --brilho-neon: drop-shadow(0 0 5px rgba(249,115,22,0.6)) drop-shadow(0 0 15px rgba(220,38,38,0.5));
-  animation: esfumadoFadeIn 2.2s ease-out forwards;
+  background: linear-gradient(90deg, #A9FFF7, #a855f7, #581c87, #7B2CBF, #A9FFF7);
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  
+  /* Mantém a entrada com atraso (delay) do seu layout */
+  filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.6)) drop-shadow(0 0 15px rgba(59, 7, 100, 0.8));
+  animation: 
+    esfumadoFadeIn 2.2s ease-out forwards,
+    gradienteInfinito 5s ease-in-out infinite alternate;
+  animation-delay: 900ms, 900ms;
 }
 
 .neon-gradiente-melhor {

@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 
-// Importações dos seus ficheiros locais de imagem:
+// Importações dos seus arquivos locais de imagem:
 import iconeSoundcloud from './assets/soundcloud-logo.png'
 import iconeSpotify from './assets/spotify-icon.jpg'
-import iconeYouTube from './assets/youtube-logo.png'
+import iconeYouTube from './assets/youutube-logo.png'
 import iconeWhatsapp from './assets/whatsapp.png'
 import iconePerigo from './assets/capa-perigo.jpg'
 import iconeBatalhao from './assets/batalhao.jpg'
@@ -94,13 +94,14 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
       muted 
       playsInline 
       preload="auto"
-      className="w-full h-full object-cover scale-[1.15] origin-top opacity-01 filter contrast-100"
+      className="w-full h-full object-cover scale-[1.15] origin-top opacity-100 filter contrast-125 satured-110"
     >
-      <source src={iconeFundo} type="video/mp4" />
+      <source src="https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/Site-Fundo.mp4"
+       type="video/mp4" />
     </video>
 
     {/* Opcional: Filtro escuro para garantir que o texto continue legível */}
-    <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
+    <div className="absolute inset-0 bg-black/20 backdrop-blur-none" />
   </div>
 
 
@@ -125,7 +126,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               onClick={() => setSecaoAtiva(item.id)} 
               className={`px-2 md:px-4 py-1 md:py-1.5 text-[13px] md:text-sm font-medium rounded-full transition-all duration-300 cursor-pointer shrink-0 ${
                 secaoAtiva === item.id 
-                  ? 'bg-linear-to-r from-opal-flash-cyan to-opal-flash-violet text-slate-950 font-bold shadow-lg shadow-opal-flash-cyan/20' // Destaque Ativo Opala
+                  ? 'bg-white/30 backdrop-blur-md border border-white/80 text-slate-950 font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)]'
                   : 'text-slate-400 hover:text-white hover:bg-white/5' // Inativo
               }`}
             >
@@ -145,29 +146,16 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
         
           <div className={secaoAtiva === 'inicio' ? "text-center max-w-3xl mx-auto space-y-8 leading-[0.85]" : "hidden"}>
             <div className="space-y-4">   
-              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
-              style={{ animationDelay: '100ms, 100ms',
-                filter: 'drop-shadow(0 0 5px rgba(0,245,212,0.6)) drop-shadow(0 0 15px rgba(168,85,247,0.5))'
-              }}
-              >
+              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10">
                 Lisa
               </h1>
             
 
-              <h3 className="neon-gradiente-alquimista text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 bg-linear-to-r from-opal-flash-cyan via-purple-400 to-opal-flash-violet bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,245,212,0.2)]"
-                style={{animationDelay: '900ms, 900ms',
-                   filter: 'drop-shadow(0 0 5px rgba(249,115,22,0.6)) drop-shadow(0 0 15px rgba(220,38,38,0.5))'
-                }}
-                // Delay alto (1800ms) para aparecer só depois da frase já estar no ecrã
-            >
+              <h3 className="neon-gradiente-alquimista text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20">
               o alquimista
             </h3>
 
-            <h2 className="neon-gradiente-melhor text-slate-200 text-lg md:text-xl"
-              style={{ animationDelay: '300ms',
-              filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(224,255,255,0.6)) drop-shadow(0 0 30px rgba(224,255,255,0.3))'
-
-              }}>
+            <h2 className="neon-gradiente-melhor text-slate-200 text-lg md:text-xl" style={{ animationDelay: '300ms' }}>
               Quer me conhecer melhor e conhecer meus trabalhos?
             </h2>
           </div>
@@ -303,13 +291,13 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
             {/* LINK SPOTIFY */}
             <a href={musica.linkSpotify} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-emerald-500 hover:scale-110 transition-all cursor-pointer" 
              fallback-href="https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33">
-              <img src={iconeSpotify} alt="Spotify" className="w-30 h-30 object-contain"/>
+              <img src={iconeSpotify} alt="Spotify" className="w-full h-full0 object-contain rounded-full"/>
             </a> 
 
             {/* LINK YOUTUBE */}
             <a href={musica.linkYoutube} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-red-500 hover:scale-110 transition-all cursor-pointer" 
              fallback-href="https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1">
-              <img src="/redes/Youtube-logo.png" alt="YouTube" className="w-7 h-7 object-contain"/>
+              <img src={iconeYouTube} alt="YouTube" className="w-full h-full object-contain rounded-full"/>
             </a> 
 
 
@@ -362,7 +350,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
             ].map((beat, index) => (   
               <div key={beat.id}      
-              className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
+              className="animar-catalogo p-6 border border-white/10 bg-slate-900/40 p-2 backdrop-blur-md rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
               style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
                 
@@ -374,11 +362,11 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                     const cliqueX = e.clientX - rect.left;
                     audio.currentTime = (cliqueX / rect.width) * audio.duration;
                   }
-                }} className="w-full h-3 bg-slate-800 rounded-full cursor-pointer relative flex items-center group">
+                }} className="w-full h-1.5 bg-slate-600 rounded-full cursor-pointer relative flex items-center group">
                   <div id={`barra-${beat.id}`} className="h-full bg-cyan-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                  <span id={`tempo-${beat.id}`} className="text-xs text-slate-500 font-mono">0:00 / 0:00</span>
+                  <span id={`tempo-${beat.id}`} className="text-xs text-white-500 font-mono">0:00 / 0:00</span>
                   <div className="flex gap-2">
                     <button id={`btn-${beat.id}`} onClick={() => {
                       darPlayNoBeat(beat);
@@ -393,8 +381,8 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                         }
                         audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
                       }
-                    }} className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
-                    <a href={`https://wa.me/5511999999999?text=Olá, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer flex items-center">Tenho Interesse</a>
+                    }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                    <a href={`https://wa.me/5511959367015?text=Olá, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 text-xs font-bold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer flex items-center">Tenho Interesse</a>
                   </div>
                 </div>
               </div>
@@ -435,11 +423,11 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                     const rect = e.currentTarget.getBoundingClientRect();
                     audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
                   }
-                }} className="w-full h-3 bg-slate-950 rounded-full cursor-pointer relative flex items-center group">
+                }} className="w-full h-1.5 bg-slate-600 rounded-full cursor-pointer relative flex items-center group">
                   <div id={`barra-${beat.id}`} className="h-full bg-slate-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span id={`tempo-${beat.id}`} className="text-xs text-slate-600 font-mono">0:00 / 0:00</span>
+                  <span id={`tempo-${beat.id}`} className="text-xs text-white-300 font-mono">0:00 / 0:00</span>
                   <button id={`btn-${beat.id}`} onClick={() => {
                     darPlayNoBeat(beat);
                     const audio = document.getElementById('global-audio-player');
@@ -453,7 +441,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
                       }
                       audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
                     }
-                  }} className="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                  }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
                 </div>
               </div>
             ))}
@@ -740,12 +728,12 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
           const webUrl = e.currentTarget.getAttribute('fallback-href'); 
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
-        }} 
+        }}                                                                                  //Quando quiser reativar o WhatsApp, basta remover "pointer-events-none opacity-00"
         className="flex flex-col items-center group text-center animar-icone animate-delay-750 pointer-events-none opacity-00" 
       > 
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-emerald-500 p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-300 "> 
           <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden"> 
-            <img src={iconeWhatsapp} alt="WhatsApp" className="w-30 h-30 object-contain"/> 
+            <img src={iconeWhatsapp} alt="WhatsApp" className="w-full h-full object-contain rounded-full"/> 
           </div> 
         </div> 
         <span className="mt-3 text-sm font-semibold text-slate-200 group-hover:text-emerald-400 transition-colors">Contato</span> 
