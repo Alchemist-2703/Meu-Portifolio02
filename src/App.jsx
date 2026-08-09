@@ -1,14 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 // Importações dos seus arquivos locais de imagem:
-import iconeSoundcloud from './assets/soundcloud-logo.png'
-import iconeSpotify from './assets/spotify-icon.jpg'
-import iconeYouTube from './assets/youutube-logo.png'
-import iconeWhatsapp from './assets/whatsapp.png'
-import iconePerigo from './assets/capa-perigo.jpg'
-import iconeBatalhao from './assets/batalhao.jpg'
 import iconeSemblante from './assets/semblante.jpg'
-import iconeFundo from './public/site-fundo.mp4'
 
 
 
@@ -80,6 +73,11 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
   setMidiaAtiva('video');
 };    
 
+const iconeSpotify = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/spotify-icon.jpg";
+const iconeWhatsapp = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/whatsapp.png";
+const iconeSoundcloud = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/soundcloud-logo.png";
+const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/youutube-logo.avif";
+
 
   return (
     // ADAPTADO: Substituído o fundo sólido 'bg-black' pelo gradiente profundo e animado da Opala
@@ -126,7 +124,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               onClick={() => setSecaoAtiva(item.id)} 
               className={`px-2 md:px-4 py-1 md:py-1.5 text-[13px] md:text-sm font-medium rounded-full transition-all duration-300 cursor-pointer shrink-0 ${
                 secaoAtiva === item.id 
-                  ? 'bg-white/30 backdrop-blur-md border border-white/80 text-slate-950 font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)]'
+                  ? 'bg-cyan-950/60 backdrop-blur-md border border-white-100 text-slate-400 font-bold shadow-[0_0_20px_rgba(6,182,212,0.25)]'
                   : 'text-slate-400 hover:text-white hover:bg-white/5' // Inativo
               }`}
             >
@@ -229,7 +227,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
           id: 1,
           titulo: "Perigo",
           tipo: "Track da Sul - ProdLisa",
-          capa: "/capas/capa-perigo.jpg",
+          capa: "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/capa-perigo.avif",
           linkSpotify: "https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33",
           linkYoutube: "https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1"
         },
@@ -237,7 +235,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
           id: 2,
           titulo: "Batalhão x Pocoto",
           tipo: "ProdLisa",
-          capa: "/capas/batalhao.jpg",
+          capa: "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/batalhao.avif",
           linkSpotify: "https://soundcloud.com/bispolisaoficial00/pocoto-x-batalhao-funkhall",
           linkYoutube: "https://youtu.be/qHShURxB1vk?si=LDLha14JLNI8SHJx"
         },
@@ -350,7 +348,7 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
             ].map((beat, index) => (   
               <div key={beat.id}      
-              className="animar-catalogo p-6 border border-white/10 bg-slate-900/40 p-2 backdrop-blur-md rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
+              className="animar-catalogo p-6 border border-white/10 bg-slate-900/60 p-2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
               style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
                 
@@ -411,10 +409,10 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
               { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
             ].map((beat, index) => (
               <div key={beat.id} 
-                className="animar-catalogo p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden" 
+                className="animar-catalogo p-6 border border-white/10 bg-white/20 p-2 backdrop-blur-md rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden" 
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="font-semibold text-slate-300 tracking-wide text-base line-through">{beat.nome}</div>
+                <div className="font-semibold text-white-300 tracking-wide text-base line-through">{beat.nome}</div>
                 
                 
                 <div onClick={(e) => {
@@ -465,67 +463,63 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
            style={{ 
               animationDelay: '800ms',
               animationDuration: '1.5s',
-              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
-            >Sets Gravados e Galeria Fotográfica para Portfólio.</p>
+              textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}>
+              Sets Gravados e Galeria Fotográfica para Portfólio.</p>
       </div>
 
       {/* Grid de Cards Menores (Altere o "gap-4" para mudar o espaçamento entre eles) */}
     <div className="space-y-6 animate-[slideDown_0.6s_ease-out]">
       <div className="flex flex-row gap-16 overflow-x-auto pb-4 scrollbar-none w-full snap-x snap-mandatory">
         
-        {/* LISTA DE CARDS DE SETS (ARRAY DE OBJETOS) - Altere as informações diretamente aqui */}
-        {[
-          {
-            id: 1,
-            titulo: "Set Cyberpunk",
-            subtitulo: "Ensaio Noturno",
-            capa: "https://unsplash.com", // Link temporário
-            linkPlataforma: "https://behance.net",
-            iconePlataforma: "https://unpkg.com"
-          },
-          {
-            id: 2,
-            titulo: "Studio Sessions",
-            subtitulo: "Sessão Minimalista",
-            capa: "https://unsplash.com", // Link temporário
-            linkPlataforma: "https://instagram.com",
-            iconePlataforma: "https://unpkg.com"
-          }
-        ].map((set) => (
-          
-          /* O CARD MENOR (w-48) - Altere a largura aqui se quiser aumentar ou diminuir o card */
-          <div key={set.id} className="w-48 flex-shrink-0 bg-transparent p-0 snap-start">
-            
-            {/* CAPA DO SET (Formato Quadrado e com borda leve) */}
-            <div className="w-full aspect-square bg-slate-800 rounded-lg overflow-hidden mb-3 shadow-md border border-slate-800/40">
-              <img src={set.capa} alt={set.titulo} className="w-full h-full object-cover" />
-            </div>
+        {/* LISTA DE CARDS DE SETS */}
+      {[
+      {
+         id: 1,
+         titulo: "SET DJ LISA {001}",
+         subtitulo: "Set de Dancehall",
+         capa: '/capas/capa-djset.jpg',
+        linkPlataforma: "https://soundcloud.com/bispolisaoficial00/set-dj-lisa-001?si=3a7a1542cc2246c8be3d8111c529560d&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+        iconePlataforma: iconeSoundcloud // Ou use uma URL direta do ícone em formato PNG
+      },
+      {
+        id: 2,
+        titulo: "Studio Sessions",
+        subtitulo: "Sessão Minimalista",
+        capa: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&auto=format&fit=crop", 
+        linkPlataforma: "https://instagram.com",
+        iconePlataforma: iconeSoundcloud
+      }
+    ].map((set) => (
+  
+      <div key={set.id} className="w-48 flex-shrink-0 bg-transparent p-0 snap-start">
+    
+      {/* CAPA DO SET */}
+      <div className="w-full aspect-square bg-slate-800 rounded-lg overflow-hidden mb-3 shadow-md border border-slate-800/40">
+        <img 
+          src={set.capa} 
+          alt={set.titulo} 
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"/>
+      </div>
 
-            {/* TÍTULO CENTRALIZADO */}
-            <div className="text-center px-1">
-              {/* Altere "text-base" para mudar o tamanho da fonte do título */}
-              <h3 className="font-bold text-base text-white truncate" title={set.titulo}>{set.titulo}</h3>
-              <p className="text-[10px] text-slate-500 truncate mb-3">{set.subtitulo}</p>
-            </div>
+      {/* TÍTULO E SUBTÍTULO */}
+      <div className="text-center px-1">
+        <h3 className="font-bold text-base text-white truncate" title={set.titulo}>{set.titulo}</h3>
+        <p className="text-[10px] text-slate-350 truncate mb-3">{set.subtitulo}</p>
+      </div>
 
-            {/* ÍCONE INTEGRADO - Altere "w-6 h-6" para mudar o tamanho do círculo */}
-            <div className="flex justify-center items-center">
-              <a href={set.linkPlataforma} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-cyan-400 hover:scale-110 transition-all cursor-pointer">
-                onClick={(e) => { 
-               e.preventDefault(); 
-               const appUrl = e.currentTarget.getAttribute('href'); 
-                const webUrl = e.currentTarget.getAttribute('fallback-href'); 
-               window.location.href = appUrl; 
-               setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
-            }} 
-                
-                {/* LOGO INTERNO - Altere "w-3 h-3" para mudar o tamanho do desenho interno */}
-                <img src={set.iconePlataforma} alt="Link" className="w-3 h-3 invert" />
-              </a>
-            </div>
+      {/* BOTAO E ÍCONE DE LINK */}
+      <div className="flex justify-center items-center">
+        <a 
+          href={set.linkPlataforma} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-cyan-400 hover:scale-110 transition-all cursor-pointer">
+          <img src={set.iconePlataforma} alt="Link" className="w-full h-full object-contain rounded-full" />
+         </a>
+      </div>
 
-          </div>
-        ))}
+      </div>
+    ))}
       </div>
     </div>
 

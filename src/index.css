@@ -294,26 +294,33 @@ html, body {
   0%, 100% { text-shadow: 0 0 4px var(--brilho-neon), 0 0 15px var(--brilho-neon), 0 0 30px var(--brilho-neon); opacity: 0.9; }
   50% { text-shadow: 0 0 8px var(--brilho-neon), 0 0 25px var(--brilho-neon), 0 0 55px var(--brilho-neon); opacity: 1; }
 }
+@keyframes gradienteInfinito {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: -200% 50%; /* Desliza suavemente sempre para a mesma direção */
+  }
+}
 
 /* Classes de Aplicação */
 .neon-gradiente-lisa {
   opacity: 0;
-  background: linear-gradient(90deg, #A9FFF7, #a855f7, #581c87, #7B2CBF, #A9FFF7);
+  background: linear-gradient(90deg, #4ea39b, #a855f7, #581c87, #7B2CBF, #A9FFF7);
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
   
-  /* Mantém o filtro neon original e aplica a animação esfumaçada + movimento do gradiente */
   filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.6)) drop-shadow(0 0 15px rgba(88, 28, 135, 0.7));
   animation: 
     esfumadoFadeIn 2s ease-out forwards,
-    gradienteInfinito 4s ease-in-out infinite alternate;
+    pulsarNeonLisa 4s ease-in-out infinite alternate;
 }
 
 .neon-gradiente-alquimista {
   opacity: 0;
-  background: linear-gradient(90deg, #A9FFF7, #a855f7, #581c87, #7B2CBF, #A9FFF7);
+  background: linear-gradient(90deg, #4ea39b, #a855f7, #581c87, #7B2CBF, #4ea39b);
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -323,14 +330,15 @@ html, body {
   filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.6)) drop-shadow(0 0 15px rgba(59, 7, 100, 0.8));
   animation: 
     esfumadoFadeIn 2.2s ease-out forwards,
-    gradienteInfinito 5s ease-in-out infinite alternate;
+    gradienteInfinito 10s ease-in-out infinite ;
   animation-delay: 900ms, 900ms;
 }
 
 .neon-gradiente-melhor {
   opacity: 0;
   --brilho-neon: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 15px #F0F8FF);
-  animation: esfumadoFadeIn 2.2s ease-out forwards;
+  animation: esfumadoFadeIn 2.2s ease-out forwards,
+  pulsarneonMelhor 4s ease-in-out infinite alternate;
 }
 
 
