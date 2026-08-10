@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 // Importações dos seus arquivos locais de imagem:
 import iconeSemblante from './assets/semblante.jpg'
@@ -92,6 +93,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       muted 
       playsInline 
       preload="auto"
+      preload="metadata"
       className="w-full h-full object-cover scale-[1.15] origin-top opacity-100 filter contrast-125 satured-110"
     >
       <source src="https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/Site-Fundo.mp4"
@@ -124,7 +126,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
               onClick={() => setSecaoAtiva(item.id)} 
               className={`px-2 md:px-4 py-1 md:py-1.5 text-[13px] md:text-sm font-medium rounded-full transition-all duration-300 cursor-pointer shrink-0 ${
                 secaoAtiva === item.id 
-                  ? 'bg-cyan-950/60 backdrop-blur-md border border-white-100 text-slate-400 font-bold shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                  ? 'bg-cyan-950/60 backdrop-blur-md border border-white-300 text-white-400 hover:text-cyan-400 font-bold shadow-[0_0_20px_rgba(6,182,212,0.25)]'
                   : 'text-slate-400 hover:text-white hover:bg-white/5' // Inativo
               }`}
             >
@@ -141,22 +143,83 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
          {/* Verifique se esta tag existe antes do fim do arquivo */}
 
         {/* SUBSEÇÃO: MENU PRINCIPAL / INÍCIO */}
-        
-          <div className={secaoAtiva === 'inicio' ? "text-center max-w-3xl mx-auto space-y-8 leading-[0.85]" : "hidden"}>
-            <div className="space-y-4">   
-              <h1 className="neon-gradiente-lisa text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10">
-                Lisa
-              </h1>
-            
+        {secaoAtiva === 'inicio' && (
+        <motion.div 
+      key="tela-inicio"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="text-center max-w-3xl mx-auto space-y-8 leading-[0.85]"
+        >
+        <div className="space-y-4">   
+          {/* 1. LISA */}
+          <motion.h1
+            initial={{ opacity: 0, y: 18, filter: 'blur(12px)' }}
+            animate={{ 
+            opacity: [0, 1, 0.9, 1],
+            y: 0,
+            filter: [
+            'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
+            'blur(0px) drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
+            'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))'
+            ]
+          }}
+            transition={{
+            opacity: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
+            y: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
+            filter: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+          }}
+            className="bg-gradient-to-r from-[#122c72] via-[#1f6492] to-[#2305cc] bg-[length:200%_auto] bg-clip-text text-transparent text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 block"
+          >
+          Lisa
+        </motion.h1>
 
-              <h3 className="neon-gradiente-alquimista text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20">
-              o alquimista
-            </h3>
+      {/* 2. O ALQUIMISTA */}
+      <motion.h2
+        initial={{ opacity: 0, y: 18, filter: 'blur(12px)', backgroundPosition: '0% 50%' }}
+        animate={{ 
+          opacity: [0, 1, 0.9, 1],
+          y: 0,
+          backgroundPosition: ['0% 50%', '-200% 50%'],
+          filter: [
+            'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))',
+            'blur(0px) drop-shadow(0 0 8px #5bd1d1) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 15px rgba(37, 29, 114, 0.95))',
+            'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))'
+          ]
+        }}
+        transition={{
+          opacity: { duration: 3.5, delay: 0.8, ease: [0.25, 1, 0.5, 1] },
+          y: { duration: 3.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+          backgroundPosition: { duration: 10, repeat: Infinity, ease: 'linear' },
+          filter: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }
+        }}
+        className="bg-gradient-to-r from-[#317a73] via-[#2049b9] via-[#230e6d] via-[#1c03a7] to-[#25706a] bg-[length:200%_auto] bg-clip-text text-transparent text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 block"
+      >
+        o alquimista
+      </motion.h2>
 
-            <h2 className="neon-gradiente-melhor text-slate-200 text-lg md:text-xl" style={{ animationDelay: '300ms' }}>
-              Quer me conhecer melhor e conhecer meus trabalhos?
-            </h2>
-          </div>
+      {/* 3. FRASE CHAMADA (Corrigido: Totalmente Nítido e Legível) */}
+      <motion.h3
+        initial={{ opacity: 0, y: 14 }} // Sem desfoque inicial para não embaçar a fonte
+        animate={{ 
+          opacity: 1,
+          y: 0,
+          textShadow: [
+            '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)',
+            '0 0 8px rgba(255, 255, 255, 0.9), 0 0 20px rgba(169, 255, 247, 0.5)',
+            '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)'
+          ]
+        }}
+        transition={{
+          opacity: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+          y: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+          textShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+        }}
+        className="text-slate-100 text-lg md:text-xl font-medium tracking-wide drop-shadow-md"
+      >
+        Quer me conhecer melhor e conhecer meus trabalhos?
+      </motion.h3>
+    </div>
           
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {menuOptions.map((item, index) => (
@@ -176,6 +239,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
                 </button>
                 ))}
             </div>
+            
 
             {/* VÍDEO DO YOUTUBE EXCLUSIVO DA TELA INICIAL COM ESPAÇAMENTO */}
             <p className="text-sm font-semibold tracking-wider text-slate-400 uppercase text-center mt-10 mb-3">
@@ -198,7 +262,8 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
               </p>
             </div>
 
-          </div>
+          </motion.div>
+  )}
         
 
         {/* SUBSEÇÃO: PRODUÇÕES */} 
@@ -344,8 +409,17 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         {gavetaDisponiveis && (
           <div className="space-y-4 pt-1">
             {[
-              { id: "disp-1", nome: "Beat Aramaico", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
+              { id: "disp-1", nome: "BEAT ARAMAICO", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
               { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
+              { id: "disp-3", nome: "MINI GAME", arquivo: "beats/disponiveis/mini_game.mp3" },
+              { id: "disp-4", nome: "RIDDIM GENERICO", arquivo: "beats/disponiveis/BEAT DONY.mp3" },
+              { id: "disp-5", nome: "NOISE LOVE", arquivo:  "beats/disponiveis/noise love.mp3" },
+              { id: "disp-6", nome: "SOCA SOCA", arquivo: "beats/disponiveis/soca soca02.mp3" },
+              { id: "disp-7", nome: "INDUARIANO", arquivo: "beats/disponiveis/INDUARIANO.mp3" },
+              { id: "disp-8", nome: "FUNKHALL DO ASSOBIO", arquivo: "beats/disponiveis/FUNKHALL DO ASSOBIO.mp3" },
+              { id: "disp-9", nome: "SYNTHALL", arquivo: "beats/disponiveis/SYNTHALL RIDDIM.mp3" },
+              { id: "disp-10", nome: "DADADADA", arquivo: "beats/disponiveis/Project_SLUCKSS-02.mp3" },
+              
             ].map((beat, index) => (   
               <div key={beat.id}      
               className="animar-catalogo p-6 border border-white/10 bg-slate-900/60 p-2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
@@ -407,6 +481,20 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
             {[
               { id: "uso-1", nome: "Beat BamBamBila - Dubplate NBDG", arquivo: "beats/em-uso/bam bam bila-2.mp3" },
               { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
+              { id: "uso-3", nome: "Beat KAMASUTRA - STP", arquivo: "beats/em-uso/kamasutra.mp3" },
+              { id: "uso-4", nome: "Beat PANTERA - STP", arquivo: "beats/em-uso/PANTERA.mp3" },
+              { id: "uso-5", nome: "Beat AVANÇADO - Reservado", arquivo: "beats/em-uso/Project_51.mp3" },
+              { id: "uso-6", nome: "Beat SET NBDG - Reservado", arquivo: "beats/em-uso/Project_SETNBDG.mp3" },
+              { id: "uso-7", nome: "Beat PERIGO - TRACK DA SUL", arquivo: "beats/em-uso/os kchorrao_00.mp3" },
+              { id: "uso-8", nome: "Beat ESPECIALISTA - SDP", arquivo: "beats/em-uso/provocando.mp3" },
+              { id: "uso-9", nome: "Beat 80/2YK - SDP", arquivo: "beats/em-uso/Project_provocado.mp3" },
+              { id: "uso-10", nome: "FUNKHALL ASSOBOLHA - Reservado", arquivo: "beats/em-uso/dubplatewe01.mp3" },
+              { id: "uso-11", nome: "Beat DUDUDUM - Reservado", arquivo: "beats/em-uso/DUDUDUM.mp3" },
+              { id: "uso-12", nome: "Beat BRINCADEIRA - Reservado", arquivo: "beats/em-uso/SARRA NO POPOZAO.mp3" },
+              { id: "uso-13", nome: "Beat MELODICO - Reservado", arquivo: "beats/em-uso/riddim tandy 00.mp3" },
+              { id: "uso-14", nome: "Beat B X P - Reservado", arquivo: "beats/em-uso/riddim batalhao x pocoto.mp3" },
+
+
             ].map((beat, index) => (
               <div key={beat.id} 
                 className="animar-catalogo p-6 border border-white/10 bg-white/20 p-2 backdrop-blur-md rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden" 
@@ -468,7 +556,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       </div>
 
       {/* Grid de Cards Menores (Altere o "gap-4" para mudar o espaçamento entre eles) */}
-    <div className="space-y-6 animate-[slideDown_0.6s_ease-out]">
+    <div className="space-y-6 animate-[slideLeft_1.5s_ease-out]">
       <div className="flex flex-row gap-16 overflow-x-auto pb-4 scrollbar-none w-full snap-x snap-mandatory">
         
         {/* LISTA DE CARDS DE SETS */}
@@ -524,7 +612,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
     </div>
 
     {/* 2. SEÇÃO INFERIOR: CARROSSEL INFINITO (Animação contínua da esquerda para a direita) */}
-    <div className="space-y-4 w-full">
+    <div className="animar-catalogo space-y-4 w-full">
       <h3 className="text-sm font-semibold tracking-wider text-slate-500 uppercase">Galeria</h3>
       
       {/* Container Máscara que esconde as sobras nas laterais do site */}

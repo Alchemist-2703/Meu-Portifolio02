@@ -237,40 +237,37 @@ html, body {
 }
 
 /* PAINEL DE CONTROLO DE CORES (Escolha uma para o Alquimista) */
-:root 
+
   /* Correção para a Lisa */
-.neon-lisa {
+/*.neon-lisa 
   color: var(--neon-lisa) !important;
   opacity: 0; /* Começa invisível */
-  animation: esfumadoFadeIn 2s ease-out forwards, pulsarNeonLisa 2.5s ease-in-out infinite;
+  /*animation: esfumadoFadeIn 2s ease-out forwards, pulsarNeonLisa 2.5s ease-in-out infinite;
   animation-delay: 0ms, 2s; /* A pulsação só começa DEPOIS do fade-in terminar */
-}
-  
-  .neon-alquimista {
-  color: var(--neon-alquimista) !important;
-  opacity: 0; /* Garante que fica 100% invisível ao abrir a página */
-  animation: esfumadoFadeIn 2.2s ease-out forwards, pulsarNeonAlquimista 2.5s ease-in-out infinite;
-  /* O segredo: o fade-in espera 1800ms para começar. A pulsação espera 4s (1800ms + 2200ms) */
-  animation-delay: 1800ms, 4000ms; 
-}
 
-  .neon-melhor {
-    color: var(--brilho-neon) !important;
+  
+  /*.neon-alquimista 
+  /*color: var(--neon-alquimista) !important;
+  opacity: 0; /* Garante que fica 100% invisível ao abrir a página */
+  /*animation: esfumadoFadeIn 2.2s ease-out forwards, pulsarNeonAlquimista 2.5s ease-in-out infinite;
+  /* O segredo: o fade-in espera 1800ms para começar. A pulsação espera 4s (1800ms + 2200ms) */
+  /*animation-delay: 1800ms, 4000ms; 
+
+
+  /* .neon-melhor */
+   /*color: var(--brilho-neon) !important;
     opacity: 0; /* Começa invisível */
-    animation: esfumadoFadeIn 1.5s ease-out forwards, pulsarNeonMelhor 2.5s ease-in-out infinite;
-    animation-delay: 300ms, 4000ms; /* O fade-in começa após 700ms, a pulsação após 4000ms */
-  }
+    /*animation: esfumadoFadeIn 1.5s ease-out forwards, pulsarNeonMelhor 2.5s ease-in-out infinite;
+   /* animation-delay: 300ms, 4000ms; /* O fade-in começa após 700ms, a pulsação após 4000ms */
+  
 
 
 /* Animação Mais Lenta e Esfumaçada (Fade-In de Entrada) Menu Principal */ 
 @keyframes esfumadoFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(15px); /* Desfoque alto para efeito esfumaçado */
-  }
-  40% {
-    filter: blur(6px);
+    transform: translateY(12px);
+    filter: blur(6px); /* Reduzido de 8px para não travar a entrada */
   }
   100% {
     opacity: 1;
@@ -279,20 +276,52 @@ html, body {
   }
 }
 
-/* Animação de Pulsação Contínua para o Neon */
+/* Animação de Pulsação Contínua para o Neon para cada Titulo inicial*/
 @keyframes pulsarNeonLisa {
-  0%, 100% { text-shadow: 0 0 4px var(--neon-lisa), 0 0 15px var(--neon-lisa), 0 0 30px var(--neon-lisa); opacity: 0.9; }
-  50% { text-shadow: 0 0 8px var(--neon-lisa), 0 0 25px var(--neon-lisa), 0 0 55px var(--neon-lisa); opacity: 1; }
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 2px #ffffff) 
+      drop-shadow(0 0 6px rgba(249, 248, 250, 0.95))
+      drop-shadow(0 0 30px rgba(146, 142, 179, 0.95));  
+    opacity: 0.9;
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 8px #ffffff) 
+      drop-shadow(0 0 6px rgba(249, 248, 250, 0.95))
+      drop-shadow(0 0 30px rgba(146, 142, 179, 0.95));  
+    opacity: 1;
+  }
 }
 
+/* 2. O ALQUIMISTA: Pulsação intensa em Laranja Quente e Neon */
 @keyframes pulsarNeonAlquimista {
-  0%, 100% { text-shadow: 0 0 4px var(--neon-alquimista), 0 0 15px var(--neon-alquimista), 0 0 30px var(--neon-alquimista); opacity: 0.9; }
-  50% { text-shadow: 0 0 8px var(--neon-alquimista), 0 0 25px var(--neon-alquimista), 0 0 55px var(--neon-alquimista); opacity: 1; }
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 2px #feffff) 
+      drop-shadow(0 0 6px rgba(174, 169, 179, 0.95))
+      drop-shadow(0 0 10px rgba(51, 19, 192, 0.7));  
+    opacity: 0.9;
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 8px #5bd1d1) 
+      drop-shadow(0 0 6px rgba(249, 248, 250, 0.95))
+      drop-shadow(0 0 15px rgba(37, 29, 114, 0.95));  
+      opacity: 1;
+  }
 }
 
+/* 3. FRASE: Glow Branco/Gelado pulsante */
 @keyframes pulsarNeonMelhor {
-  0%, 100% { text-shadow: 0 0 4px var(--brilho-neon), 0 0 15px var(--brilho-neon), 0 0 30px var(--brilho-neon); opacity: 0.9; }
-  50% { text-shadow: 0 0 8px var(--brilho-neon), 0 0 25px var(--brilho-neon), 0 0 55px var(--brilho-neon); opacity: 1; }
+  0%, 100% {
+    text-shadow: 0 0 8px #ffffff, 0 0 16px rgba(255, 255, 255, 0.4), 0 0 25px rgba(169, 255, 247, 0.3);
+    opacity: 0.85;
+  }
+  50% {
+    text-shadow: 0 0 12px #ffffff, 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(169, 255, 247, 0.7), 0 0 70px rgba(0, 245, 212, 0.5);
+    opacity: 1;
+  }
 }
 @keyframes gradienteInfinito {
   0% {
@@ -303,10 +332,11 @@ html, body {
   }
 }
 
-/* Classes de Aplicação */
+/* Classes de Aplicação */   /*4917d3, 2a2c94, 2049b9, a246e9, 2305cc, 00221f*/
 .neon-gradiente-lisa {
   opacity: 0;
-  background: linear-gradient(90deg, #4ea39b, #a855f7, #581c87, #7B2CBF, #A9FFF7);
+  will-change: opacity, transform, filter;
+  background: linear-gradient(90deg, #122c72, #1f6492, #2403a8, #2305cc);
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -314,13 +344,15 @@ html, body {
   
   filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.6)) drop-shadow(0 0 15px rgba(88, 28, 135, 0.7));
   animation: 
-    esfumadoFadeIn 2s ease-out forwards,
-    pulsarNeonLisa 4s ease-in-out infinite alternate;
+    esfumadoFadeIn 3s cubic-bezier(1, 2, 1, 2) forwards,
+    pulsarNeonLisa 3s ease-in-out infinite;
+    animation-delay: 2ms, 2ms !important;
 }
 
 .neon-gradiente-alquimista {
   opacity: 0;
-  background: linear-gradient(90deg, #4ea39b, #a855f7, #581c87, #7B2CBF, #4ea39b);
+  will-change: opacity, transform, filter;
+  background: linear-gradient(90deg, #317a73, #2049b9, #230e6d, #1c03a7, #003530, #08665d, #0e5f57, #25706a);
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -329,17 +361,20 @@ html, body {
   /* Mantém a entrada com atraso (delay) do seu layout */
   filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.6)) drop-shadow(0 0 15px rgba(59, 7, 100, 0.8));
   animation: 
-    esfumadoFadeIn 2.2s ease-out forwards,
-    gradienteInfinito 10s ease-in-out infinite ;
-  animation-delay: 900ms, 900ms;
+    esfumadoFadeIn 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+    gradienteInfinito 10s ease-in-out infinite,
+    pulsarNeonAlquimista 4s ease-in-out infinite !important;
+  animation-delay: 1200ms, 2.4s, 2.4s !important;
 }
 
 .neon-gradiente-melhor {
   opacity: 0;
-  --brilho-neon: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 15px #F0F8FF);
-  animation: esfumadoFadeIn 2.2s ease-out forwards,
-  pulsarneonMelhor 4s ease-in-out infinite alternate;
-}
+    will-change: opacity, transform, filter;
+  --brilho-neon: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 15px #c1d1df);
+  animation: esfumadoFadeIn 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+  pulsarneonMelhor 4s ease-in-out infinite !important;
+  animation-delay: 600ms, 1.8s !important;
+} 
 
 
 
