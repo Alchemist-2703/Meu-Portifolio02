@@ -171,56 +171,57 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           }}
             className="bg-gradient-to-r from-[#122c72] via-[#1f6492] to-[#2305cc] bg-[length:200%_auto] bg-clip-text text-transparent text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 block"
           >
-          Lisa
-        </motion.h1>
+            Lisa
+          </motion.h1>
 
-      {/* 2. O ALQUIMISTA */}
-      <motion.h2
-        initial={{ opacity: 0, y: 18, filter: 'blur(12px)', backgroundPosition: '0% 50%' }}
-        animate={{ 
-          opacity: [0, 1, 0.9, 1],
-          y: 0,
-          backgroundPosition: ['0% 50%', '-200% 50%'],
-          filter: [
+          {/* 2. O ALQUIMISTA */}
+          <motion.h2
+            initial={{ opacity: 0, y: 18, filter: 'blur(12px)', backgroundPosition: '0% 50%' }}
+            animate={{ 
+            opacity: [0, 1, 0.9, 1],
+            y: 0,
+            backgroundPosition: ['0% 50%', '-200% 50%'],
+            filter: [
             'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))',
             'blur(0px) drop-shadow(0 0 8px #5bd1d1) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 15px rgba(37, 29, 114, 0.95))',
             'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))'
-          ]
-        }}
-        transition={{
-          opacity: { duration: 3.5, delay: 0.8, ease: [0.25, 1, 0.5, 1] },
-          y: { duration: 3.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
-          backgroundPosition: { duration: 10, repeat: Infinity, ease: 'linear' },
-          filter: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }
-        }}
-        className="bg-gradient-to-r from-[#317a73] via-[#2049b9] via-[#230e6d] via-[#1c03a7] to-[#25706a] bg-[length:200%_auto] bg-clip-text text-transparent text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 block"
-      >
-        o alquimista
-      </motion.h2>
+            ]
+          }}
+            transition={{
+            opacity: { duration: 3.5, delay: 0.8, ease: [0.25, 1, 0.5, 1] },
+            y: { duration: 3.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+            backgroundPosition: { duration: 10, repeat: Infinity, ease: 'linear' },
+            filter: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }
+          }}
+            className="bg-gradient-to-r from-[#317a73] via-[#2049b9] via-[#230e6d] via-[#1c03a7] to-[#25706a] bg-[length:200%_auto] bg-clip-text text-transparent text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 block"
+          >
+            o alquimista
+          </motion.h2>
 
-      {/* 3. FRASE CHAMADA (Corrigido: Totalmente Nítido e Legível) */}
-      <motion.h3
-        initial={{ opacity: 0, y: 14 }} // Sem desfoque inicial para não embaçar a fonte
-        animate={{ 
-          opacity: 1,
-          y: 0,
-          textShadow: [
+          {/* 3. FRASE CHAMADA (Corrigido: Totalmente Nítido e Legível) */}
+          <motion.h3
+            initial={{ opacity: 0, y: 14 }} // Sem desfoque inicial para não embaçar a fonte
+            animate={{ 
+            opacity: 1,
+            y: 0,
+            textShadow: [
             '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)',
             '0 0 8px rgba(255, 255, 255, 0.9), 0 0 20px rgba(169, 255, 247, 0.5)',
             '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)'
-          ]
-        }}
-        transition={{
-          opacity: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
-          y: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
-          textShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-        }}
-        className="text-slate-100 text-lg md:text-xl font-medium tracking-wide drop-shadow-md"
-      >
-        Quer me conhecer melhor e conhecer meus trabalhos?
-      </motion.h3>
-    </div>
+            ]
+          }}
+            transition={{
+            opacity: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+            y: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+            textShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+          }}
+            className="text-slate-100 text-lg md:text-xl font-medium tracking-wide drop-shadow-md"
+          >
+            Quer me conhecer melhor e conhecer meus trabalhos?
+          </motion.h3>
+        </div>
           
+            {/*BOTÕES DE NAVEGAÇÃO PRINCIPAL (Com animação de atraso para cada botão)*/}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {menuOptions.map((item, index) => (
                 <button
@@ -376,26 +377,26 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
        {/* SUBSEÇÃO: CATÁLOGO */}
       
-  <div className={secaoAtiva === 'catalogo' ?"space-y-6 cabecalho-fade-in" : "hidden"}>
-    {/* Cabeçalho */}
-    <div className="space-y-2">
-      <h2 className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Catálogo de Beats</h2>
-      <p className="text-slate-250 text-sm md:text-base"
-           style={{ 
+      <div className={secaoAtiva === 'catalogo' ?"space-y-6 cabecalho-fade-in" : "hidden"}>
+        {/* Cabeçalho */}
+        <div className="space-y-2">
+          <h2 className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Catálogo de Beats</h2>
+          <p className="text-slate-250 text-sm md:text-base"
+            style={{ 
               animationDelay: '800ms',
               animationDuration: '1.5s',
               textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
             > Ouça os Beats e garanta a sua produção exclusiva.</p>
-    </div>
+        </div>
 
     
 
-    {/* LAYOUT EM DUAS COLUNAS */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* LAYOUT EM DUAS COLUNAS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
       
-      {/* ==================== COLUNA 1: BEATS DISPONÍVEIS ==================== */}
-      <div className="space-y-4">
-        <button 
+        {/* ==================== COLUNA 1: BEATS DISPONÍVEIS ==================== */}
+        <div className="space-y-4">
+         <button 
           onClick={() => setGavetaDisponiveis(!gavetaDisponiveis)}
           className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
         >
@@ -406,39 +407,40 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           <span className={`text-cyan-400 font-mono transition-transform duration-300 text-lg ${gavetaDisponiveis ? 'rotate-180' : ''}`}>▼</span>
         </button>
 
-        {gavetaDisponiveis && (
-          <div className="space-y-4 pt-1">
-            {[
-              { id: "disp-1", nome: "BEAT ARAMAICO", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
-              { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
-              { id: "disp-3", nome: "MINI GAME", arquivo: "beats/disponiveis/mini_game.mp3" },
-              { id: "disp-4", nome: "RIDDIM GENERICO", arquivo: "beats/disponiveis/BEAT DONY.mp3" },
-              { id: "disp-5", nome: "NOISE LOVE", arquivo:  "beats/disponiveis/noise love.mp3" },
-              { id: "disp-6", nome: "SOCA SOCA", arquivo: "beats/disponiveis/soca soca02.mp3" },
-              { id: "disp-7", nome: "INDUARIANO", arquivo: "beats/disponiveis/INDUARIANO.mp3" },
-              { id: "disp-8", nome: "FUNKHALL DO ASSOBIO", arquivo: "beats/disponiveis/FUNKHALL DO ASSOBIO.mp3" },
-              { id: "disp-9", nome: "SYNTHALL", arquivo: "beats/disponiveis/SYNTHALL RIDDIM.mp3" },
-              { id: "disp-10", nome: "DADADADA", arquivo: "beats/disponiveis/Project_SLUCKSS-02.mp3" },
+          {gavetaDisponiveis && (
+            <div className="space-y-4 pt-1">
+              {[
+                { id: "disp-1", nome: "BEAT ARAMAICO", arquivo: "beats/disponiveis/BEAT ARAMAICO 13(MIX).mp3" },
+                { id: "disp-2", nome: "NONAME", arquivo: "beats/disponiveis/NONAME.mp3" },
+                { id: "disp-3", nome: "MINI GAME", arquivo: "beats/disponiveis/mini_game.mp3" },
+                { id: "disp-4", nome: "RIDDIM GENERICO", arquivo: "beats/disponiveis/BEAT DONY.mp3" },
+                { id: "disp-5", nome: "NOISE LOVE", arquivo:  "beats/disponiveis/noise love.mp3" },
+                { id: "disp-6", nome: "SOCA SOCA", arquivo: "beats/disponiveis/soca soca02.mp3" },
+                { id: "disp-7", nome: "INDUARIANO", arquivo: "beats/disponiveis/INDUARIANO.mp3" },
+                { id: "disp-8", nome: "FUNKHALL DO ASSOBIO", arquivo: "beats/disponiveis/FUNKHALL DO ASSOBIO.mp3" },
+                { id: "disp-9", nome: "SYNTHALL", arquivo: "beats/disponiveis/SYNTHALL RIDDIM.mp3" },
+                { id: "disp-10", nome: "DADADADA", arquivo: "beats/disponiveis/Project_SLUCKSS-02.mp3" },
               
-            ].map((beat, index) => (   
-              <div key={beat.id}      
-              className="animar-catalogo p-6 border border-white/10 bg-slate-900/60 p-2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
-              style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
+              ].map((beat, index) => (   
+                <div key={beat.id}      
+                className="animar-catalogo p-6 border border-white/10 bg-slate-900/60 p-2 backdrop-blur-sm rounded-xl space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
+                style={{ animationDelay: `${index * 150}ms` }}>
+                  <div className="font-semibold text-white tracking-wide text-base lg:group-hover:text-cyan-400 transition-colors">{beat.nome}</div>
                 
                 {/* LINHA DO TEMPO INTERATIVA */}
-                <div onClick={(e) => {
-                  const audio = document.getElementById('global-audio-player');
-                  if (audio && audio.dataset.beatId === beat.id && audio.duration) {
+                  <div onClick={(e) => {
+                    const audio = document.getElementById('global-audio-player');
+                    if (audio && audio.dataset.beatId === beat.id && audio.duration) {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const cliqueX = e.clientX - rect.left;
                     audio.currentTime = (cliqueX / rect.width) * audio.duration;
                   }
                 }} className="w-full h-1.5 bg-slate-600 rounded-full cursor-pointer relative flex items-center group">
                   <div id={`barra-${beat.id}`} className="h-full bg-cyan-500 w-0 rounded-full transition-all duration-75 pointer-events-none"></div>
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                  <span id={`tempo-${beat.id}`} className="text-xs text-white-500 font-mono">0:00 / 0:00</span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                    <span id={`tempo-${beat.id}`} className="text-xs text-white-500 font-mono">0:00 / 0:00</span>
                   <div className="flex gap-2">
                     <button id={`btn-${beat.id}`} onClick={() => {
                       darPlayNoBeat(beat);
@@ -483,14 +485,14 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
               { id: "uso-2", nome: "Beat ZazaStyle - Reservado", arquivo: "beats/em-uso/Project_zazaxstye.mp3" },
               { id: "uso-3", nome: "Beat KAMASUTRA - STP", arquivo: "beats/em-uso/kamasutra.mp3" },
               { id: "uso-4", nome: "Beat PANTERA - STP", arquivo: "beats/em-uso/PANTERA.mp3" },
-              { id: "uso-5", nome: "Beat AVANÇADO - Reservado", arquivo: "beats/em-uso/Project_51.mp3" },
+              { id: "uso-5", nome: "Beat AVANÇADO - Reservado", arquivo: "beats/em-uso/Project_51.wav" },
               { id: "uso-6", nome: "Beat SET NBDG - Reservado", arquivo: "beats/em-uso/Project_SETNBDG.mp3" },
               { id: "uso-7", nome: "Beat PERIGO - TRACK DA SUL", arquivo: "beats/em-uso/os kchorrao_00.mp3" },
               { id: "uso-8", nome: "Beat ESPECIALISTA - SDP", arquivo: "beats/em-uso/provocando.mp3" },
               { id: "uso-9", nome: "Beat 80/2YK - SDP", arquivo: "beats/em-uso/Project_provocado.mp3" },
               { id: "uso-10", nome: "FUNKHALL ASSOBOLHA - Reservado", arquivo: "beats/em-uso/dubplatewe01.mp3" },
               { id: "uso-11", nome: "Beat DUDUDUM - Reservado", arquivo: "beats/em-uso/DUDUDUM.mp3" },
-              { id: "uso-12", nome: "Beat BRINCADEIRA - Reservado", arquivo: "beats/em-uso/SARRA NO POPOZAO.mp3" },
+              { id: "uso-12", nome: "Beat BRINCADEIRA - Reservado", arquivo: "beats/em-uso/SARRA NO POPOZAO.wav" },
               { id: "uso-13", nome: "Beat MELODICO - Reservado", arquivo: "beats/em-uso/riddim tandy 00.mp3" },
               { id: "uso-14", nome: "Beat B X P - Reservado", arquivo: "beats/em-uso/riddim batalhao x pocoto.mp3" },
 
