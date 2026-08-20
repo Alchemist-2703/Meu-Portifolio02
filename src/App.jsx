@@ -1,5 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay'
 
 // Importações dos seus arquivos locais de imagem:
 import iconeSemblante from './assets/semblante.jpg'
@@ -16,6 +21,23 @@ const [aceitouCookies, setAceitouCookies] = useState(false);
   // Estados para controlar a abertura das gavetas de "Disponíveis" e "Usados"
   const [gavetaDisponiveis, setGavetaDisponiveis] = useState(false);
   const [gavetaUsados, setGavetaUsados] = useState(false);
+
+  // Estado para controlar a mídia expandida no Modal
+  const [midiaGaleriaAtiva, setMidiaGaleriaAtiva] = useState(null);
+
+  // Lista de arquivos da Galeria (fotos e vídeos)
+  const listaGaleria = [
+    { id: 1, tipo: 'imagem', url: '/galeria/audicao-duhduh.jpg' },
+    { id: 2, tipo: 'imagem', url: '/galeria/encontro.jpg' },
+    { id: 3, tipo: 'imagem', url: '/galeria/IMG_20260819_201619.jpg' },
+    { id: 4, tipo: 'imagem', url: '/galeria/IMG_20260819_201637.jpg' },
+    { id: 5, tipo: 'imagem', url: '/galeria/IMG_20260819_201653.jpg' },
+    { id: 6, tipo: 'imagem', url: '/galeria/nbdgxdbpm.jpg' },
+    { id: 7, tipo: 'video', url: '/galeria/Record_2026-08-19-20-04-03_1c337646f29875672b5a61192b9010f9.mp4' },
+    { id: 8, tipo: 'video', url: '/galeria/Record_2026-08-19-20-07-11_1c337646f29875672b5a61192b9010f9.mp4' },
+    { id: 9, tipo: 'video', url: '/galeria/VID_20260819_200205.mp4' },
+    { id: 10, tipo: 'video', url: '/galeria/VID_20260819_200338.mp4' },
+  ];
 
 
   // Lista de opções do menu para evitar repetição de código
@@ -154,7 +176,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         <div className="space-y-4">   
           {/* 1. LISA */}
           <motion.h1
-            initial={{ opacity: 0, y: 18, filter: 'blur(12px)' }}
+            initial={{ opacity: 0, y: 12, filter: 'blur(16px)' }}
             animate={{ 
             opacity: [0, 1, 0.9, 1],
             y: 0,
@@ -176,7 +198,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
           {/* 2. O ALQUIMISTA */}
           <motion.h2
-            initial={{ opacity: 0, y: 18, filter: 'blur(12px)', backgroundPosition: '0% 50%' }}
+            initial={{ opacity: 0, y: 12, filter: 'blur(16px)', backgroundPosition: '0% 50%' }}
             animate={{ 
             opacity: [0, 1, 0.9, 1],
             y: 0,
@@ -200,7 +222,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
           {/* 3. FRASE CHAMADA (Corrigido: Totalmente Nítido e Legível) */}
           <motion.h3
-            initial={{ opacity: 0, y: 14 }} // Sem desfoque inicial para não embaçar a fonte
+            initial={{ opacity: 0, y: 8 }} // Sem desfoque inicial para não embaçar a fonte
             animate={{ 
             opacity: 1,
             y: 0,
@@ -576,7 +598,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         titulo: "Studio Sessions",
         subtitulo: "Sessão Minimalista",
         capa: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&auto=format&fit=crop", 
-        linkPlataforma: "https://instagram.com",
+        linkPlataforma: "https://soundcloud.com/bispolisaoficial00",
         iconePlataforma: iconeSoundcloud
       }
     ].map((set) => (
@@ -613,52 +635,48 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       </div>
     </div>
 
-    {/* 2. SEÇÃO INFERIOR: CARROSSEL INFINITO (Animação contínua da esquerda para a direita) */}
+    {/* 2. SEÇÃO INFERIOR: CARROSSEL SWIPER INTERATIVO */}
     <div className="animar-catalogo space-y-4 w-full">
-      <h3 className="text-sm font-semibold tracking-wider text-slate-500 uppercase">Galeria</h3>
-      
-      {/* Container Máscara que esconde as sobras nas laterais do site */}
-       <div className="w-full overflow-hidden border-y border-slate-900/40 py-2 bg-slate-900/10">
-  
-        {/* 🌟 CONTAINER COM A NOVA CLASSE DE LOOP PERFEITO */}
-        <div className="esteira-infinita gap-4">
-    
-         {/* 📸 BLOCO A (Lista Original) */}
-       {[
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com"
-        ].map((url, index) => (
-       <div key={`bloco-a-${index}`} className="w-40 h-28 bg-slate-800 rounded-md overflow-hidden shadow-inner">
-        <img src={url} alt={`Preview A ${index}`} className="w-full h-full object-cover" />
+      <h3 className="text-sm font-semibold tracking-wider text-slate-400 uppercase">Galeria</h3>
+      <div className="w-full border-y border-slate-900/40 py-4 bg-slate-900/10 relative group">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={16}
+          slidesPerView={'auto'}
+          loop={true}
+          autoplay={{ delay: 700, disableOnInteraction: false }}
+          delay={700}
+          disableOnInteraction={false}
+          pauseOnMouseEnter={true}
+          navigation={true}
+          className="w-full px-2"
+        >
+          {listaGaleria.map((item) => (
+            <SwiperSlide key={item.id} className="!w-32 !h-32">
+              <div 
+                onClick={() => setMidiaGaleriaAtiva(item)}
+                className="w-full h-full aspect-square bg-slate-800 rounded-lg overflow-hidden shadow-md cursor-pointer transform hover:scale-105 transition-all duration-300 relative border border-white/10 group/item"
+              >
+                {item.tipo === 'imagem' ? (
+                  <img src={item.url} alt="Galeria" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full relative">
+                    <video src={item.url} muted className="w-full h-full object-cover pointer-events-none" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white text-xs">
+                        ▶
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-    ))}
-
-         {/* 📸 BLOCO B (Cópia Idêntica - Fica colada logo após a última imagem do Bloco A) */}
-       {[
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com",
-        "https://unsplash.com"
-       ].map((url, index) => (
-      <div key={`bloco-b-${index}`} className="w-40 h-28 bg-slate-800 rounded-md overflow-hidden shadow-inner">
-        <img src={url} alt={`Preview B ${index}`} className="w-full h-full object-cover" />
-      </div>
-       ))}
-
-      </div>
-     </div>
     </div>
-
   </div>
-)}
+  )}
 
 
 
@@ -827,8 +845,44 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       )}
       </main>
         
-      {/* Elemento de Áudio Global para os Beats */}
-      
+      {/* MODAL REDIMENSIONADO DA GALERIA */}
+      {midiaGaleriaAtiva && (
+        <div 
+          onClick={() => setMidiaGaleriaAtiva(null)}
+          className="fixed inset-0 z-[99999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer"
+        >
+          <div 
+            className="relative max-w-lg w-full bg-slate-900/90 border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col items-center justify-center cursor-default" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botão de fechar no canto superior */}
+            <button 
+              onClick={() => setMidiaGaleriaAtiva(null)}
+              className="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors z-10 cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {/* Container da Mídia */}
+            <div className="w-full flex items-center justify-center overflow-hidden rounded-xl bg-black/50 mt-6">
+              {midiaGaleriaAtiva.tipo === 'imagem' ? (
+                <img 
+                  src={midiaGaleriaAtiva.url} 
+                  alt="Mídia Ampliada" 
+                  className="max-w-full max-h-[50vh] object-contain rounded-lg" 
+                />
+              ) : (
+                <video 
+                  src={midiaGaleriaAtiva.url} 
+                  controls 
+                  autoPlay 
+                  className="max-w-full max-h-[50vh] rounded-lg" 
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}      
 
       {/* 🍪 BANNER DE COOKIES (Fixo na parte inferior e independente das subseções) */}
       {!aceitouCookies && (
@@ -862,6 +916,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           </div>
         </div>
       )}
+
       <audio 
         id="global-audio-player" 
         className="hidden" 
