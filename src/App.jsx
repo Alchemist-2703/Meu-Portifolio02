@@ -335,14 +335,14 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           linkSpotify: "https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33",
           linkYoutube: "https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1"
         },
-        {
-          id: 4,
-          titulo: "Nome da Música 4",
-          tipo: "ProdLisa",
-          capa: "/capas/musica4.jpg",
-          linkSpotify: "https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33",
-          linkYoutube: "https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1"
-        }
+        //
+          //id: 4,
+          //titulo: "Nome da Música 4",
+          //tipo: "ProdLisa",
+          //capa: "/capas/musica4.jpg",
+          //linkSpotify: "https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33",
+          //linkYoutube: "https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1"
+        //
       ].map((musica) => ( 
         
         /* O CARD (w-64) */
@@ -727,8 +727,8 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
       {/* CARD 2: TIKTOK */} 
       <a 
-       href="snssdk1128://user/profile/SEU_ID_NUMERICO" 
-      fallback-href="https://tiktok.com" 
+       href="https://www.tiktok.com/@prod.lisa_bispo?_r=1&_t=ZS-991ktFU2NjW" 
+      fallback-href="https://www.tiktok.com/@prod.lisa_bispo?_r=1&_t=ZS-991ktFU2NjW" 
       target="_blank" 
       rel="noopener noreferrer" 
      onClick={(e) => { 
