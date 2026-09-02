@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Arquivos temporários e backups
+App-backup.jsx
+*-backup.*
+*.backup
+
+# Configurações de linters locais não utilizados
+.oxlintrc.json
