@@ -329,11 +329,11 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         },
         {
           id: 3,
-          titulo: "Semblante do Mal",
+          titulo: "Na onda do Beck",
           tipo: "Duhduh Pereira - ProdLisa",
-          capa: "/capas/semblante.jpg",
-          linkSpotify: "https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33",
-          linkYoutube: "https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1"
+          capa: "/capas/NaOnda.jpg",
+          linkSpotify: "https://open.spotify.com/intl-pt/album/1TDvgBJHJYCcN8CWmDX6qR?si=62384dcef3784ba1",
+          linkYoutube: "https://www.youtube.com/watch?v=gFQTEZQjNBk&list=RDgFQTEZQjNBk&start_radio=1"
         },
         //
           //id: 4,
