@@ -115,12 +115,15 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       muted 
       playsInline 
       preload="auto"
-      preload="metadata"
       className="w-full h-full object-cover scale-[1.15] origin-top opacity-100 filter contrast-125 satured-110"
     >
       <source src="https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/Site-Fundo.mp4"
-       type="video/mp4" />
-    </video>
+      media="(max-width: 767px)"
+      type="video/mp4"/>
+
+      <source src="https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object/public/midia-portifolio/video-fundo-desktop.mp4"
+      type="video/mp4" />
+      </video>
 
     {/* Opcional: Filtro escuro para garantir que o texto continue legível */}
     <div className="absolute inset-0 bg-black/20 backdrop-blur-none" />
