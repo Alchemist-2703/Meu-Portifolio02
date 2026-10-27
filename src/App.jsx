@@ -126,7 +126,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       </video>
 
     {/* Opcional: Filtro escuro para garantir que o texto continue legível */}
-    <div className="absolute inset-0 bg-black/20 backdrop-blur-none" />
+    <div className="absolute inset-0 bg-black/10 backdrop-blur-none" />
   </div>
 
 
