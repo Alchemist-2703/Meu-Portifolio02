@@ -402,3 +402,13 @@ html, body {
   margin-top: 25px;         /* Empurra a frase mais para baixo */
   font-size: 1.2rem;
 }
+
+/* Suporte ao modo de economia de energia / preferência de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .neon-gradiente-lisa,
+  .neon-gradiente-alquimista,
+  .neon-gradiente-melhor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -12,6 +12,9 @@ import iconeSemblante from './assets/semblante.jpg'
 
 
 export default function App() {
+  // Hook para detectar modo de economia de energia / preferência de redução de movimento do sistema
+  const shouldReduceMotion = useReducedMotion();
+
   // Estado local para esconder o banner assim que ele clicar
 const [aceitouCookies, setAceitouCookies] = useState(false);
 
@@ -137,7 +140,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         {/* Lado Esquerdo: Logotipo / Voltar ao Início */}
         <button 
           onClick={() => setSecaoAtiva('inicio')} 
-          className="text-base md:text-xl font-bold tracking-wider text-white hover:text-opal-flash-cyan transition-colors uppercase cursor-pointer shrink-0"
+          className="text-base md:text-xl font-bold tracking-wider text-white hover:text-opal-flash-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm transition-colors uppercase cursor-pointer shrink-0"
         >
           Portifolio
         </button>
@@ -149,7 +152,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
             <button 
               key={item.id} 
               onClick={() => setSecaoAtiva(item.id)} 
-              className={`px-2 md:px-4 py-1 md:py-1.5 text-[13px] md:text-sm font-medium rounded-full transition-all duration-300 cursor-pointer shrink-0 ${
+              className={`px-2 md:px-4 py-1 md:py-1.5 text-[13px] md:text-sm font-medium rounded-full transition-all duration-300 cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                 secaoAtiva === item.id 
                   ? 'bg-cyan-950/60 backdrop-blur-md border border-white-300 text-white-400 hover:text-cyan-400 font-bold shadow-[0_0_20px_rgba(6,182,212,0.25)]'
                   : 'text-slate-400 hover:text-white hover:bg-white/5' // Inativo
@@ -180,20 +183,24 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           {/* 1. LISA */}
           <motion.h1
             initial={{ opacity: 0, y: 12, filter: 'blur(16px)' }}
-            animate={{ 
-            opacity: [0, 1, 0.9, 1],
-            y: 0,
-            filter: [
-            'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
-            'blur(0px) drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
-            'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))'
-            ]
-          }}
-            transition={{
-            opacity: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
-            y: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
-            filter: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-          }}
+            animate={shouldReduceMotion ? {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))'
+            } : { 
+              opacity: [0, 1, 0.9, 1],
+              y: 0,
+              filter: [
+                'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
+                'blur(0px) drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))',
+                'blur(0px) drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 30px rgba(146, 142, 179, 0.95))'
+              ]
+            }}
+            transition={shouldReduceMotion ? { duration: 0.8, ease: 'easeOut' } : {
+              opacity: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
+              y: { duration: 3.5, ease: [0.25, 1, 0.5, 1] },
+              filter: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+            }}
             className="bg-gradient-to-r from-[#122c72] via-[#1f6492] to-[#2305cc] bg-[length:200%_auto] bg-clip-text text-transparent text-5xl md:text-7xl font-extrabold tracking-[0.18em] uppercase leading-none -mb-2 md:-mb-3 z-10 block"
           >
             Lisa
@@ -202,22 +209,27 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           {/* 2. O ALQUIMISTA */}
           <motion.h2
             initial={{ opacity: 0, y: 12, filter: 'blur(16px)', backgroundPosition: '0% 50%' }}
-            animate={{ 
-            opacity: [0, 1, 0.9, 1],
-            y: 0,
-            backgroundPosition: ['0% 50%', '-200% 50%'],
-            filter: [
-            'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))',
-            'blur(0px) drop-shadow(0 0 8px #5bd1d1) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 15px rgba(37, 29, 114, 0.95))',
-            'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))'
-            ]
-          }}
-            transition={{
-            opacity: { duration: 3.5, delay: 0.8, ease: [0.25, 1, 0.5, 1] },
-            y: { duration: 3.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
-            backgroundPosition: { duration: 10, repeat: Infinity, ease: 'linear' },
-            filter: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }
-          }}
+            animate={shouldReduceMotion ? {
+              opacity: 1,
+              y: 0,
+              backgroundPosition: '0% 50%',
+              filter: 'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))'
+            } : { 
+              opacity: [0, 1, 0.9, 1],
+              y: 0,
+              backgroundPosition: ['0% 50%', '-200% 50%'],
+              filter: [
+                'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))',
+                'blur(0px) drop-shadow(0 0 8px #5bd1d1) drop-shadow(0 0 6px rgba(249, 248, 250, 0.95)) drop-shadow(0 0 15px rgba(37, 29, 114, 0.95))',
+                'blur(0px) drop-shadow(0 0 2px #feffff) drop-shadow(0 0 6px rgba(174, 169, 179, 0.95)) drop-shadow(0 0 10px rgba(51, 19, 192, 0.7))'
+              ]
+            }}
+            transition={shouldReduceMotion ? { duration: 0.8, ease: 'easeOut' } : {
+              opacity: { duration: 3.5, delay: 0.8, ease: [0.25, 1, 0.5, 1] },
+              y: { duration: 3.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+              backgroundPosition: { duration: 10, repeat: Infinity, ease: 'linear' },
+              filter: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }
+            }}
             className="bg-gradient-to-r from-[#317a73] via-[#2049b9] via-[#230e6d] via-[#1c03a7] to-[#25706a] bg-[length:200%_auto] bg-clip-text text-transparent text-3xl md:text-7xl font-extrabold tracking-[0.12em] uppercase leading-none z-20 block"
           >
             o alquimista
@@ -226,20 +238,24 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           {/* 3. FRASE CHAMADA (Corrigido: Totalmente Nítido e Legível) */}
           <motion.h3
             initial={{ opacity: 0, y: 8 }} // Sem desfoque inicial para não embaçar a fonte
-            animate={{ 
-            opacity: 1,
-            y: 0,
-            textShadow: [
-            '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)',
-            '0 0 8px rgba(255, 255, 255, 0.9), 0 0 20px rgba(169, 255, 247, 0.5)',
-            '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)'
-            ]
-          }}
-            transition={{
-            opacity: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
-            y: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
-            textShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-          }}
+            animate={shouldReduceMotion ? {
+              opacity: 1,
+              y: 0,
+              textShadow: '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)'
+            } : { 
+              opacity: 1,
+              y: 0,
+              textShadow: [
+                '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)',
+                '0 0 8px rgba(255, 255, 255, 0.9), 0 0 20px rgba(169, 255, 247, 0.5)',
+                '0 0 4px rgba(255, 255, 255, 0.6), 0 0 10px rgba(169, 255, 247, 0.2)'
+              ]
+            }}
+            transition={shouldReduceMotion ? { duration: 0.8, ease: 'easeOut' } : {
+              opacity: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+              y: { duration: 2.8, delay: 0.4, ease: 'easeOut' },
+              textShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+            }}
             className="text-slate-100 text-lg md:text-xl font-medium tracking-wide drop-shadow-md"
           >
             Quer me conhecer melhor e conhecer meus trabalhos?
@@ -252,7 +268,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
                 <button
                   key={item.id}
                   onClick={() => setSecaoAtiva(item.id)}
-                  className="animar-botao-home p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-lg text-left shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
+                  className="animar-botao-home p-6 bg-white/0.5 border border-white/2 backdrop-blur-sm rounded-lg text-left shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(0,0,0,0.5)] lg:hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-300 group active:scale-[0.98] w-full block cursor-pointer relative overflow-hidden"
                   style={{ animationDelay: `${500 + index * 200}ms` }}>
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-white lg:group-hover:text-opal-flash-cyan transition-colors">
@@ -269,7 +285,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
             {/* VÍDEO DO YOUTUBE EXCLUSIVO DA TELA INICIAL COM ESPAÇAMENTO */}
             <p className="text-sm font-semibold tracking-wider text-slate-400 uppercase text-center mt-10 mb-3">
-               Confira meu último lançamento</p>
+              Confira meu último lançamento</p>
             <div className="w-full max-w-xl mx-auto mt-10 rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-slate-900/50 p-2 backdrop-blur-md">
               <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                 <iframe 
@@ -298,9 +314,9 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
 
             {/* Cabeçalho */}
         <div className="space-y-2 cabecalho-fade-in"> 
-           <p className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Produções</p> 
-           <p className="text-slate-250 text-sm md:text-base"
-           style={{ 
+          <p className="text-3xl font-bold text-white border-b border-slate-850 pb-4">Produções</p> 
+          <p className="text-slate-250 text-sm md:text-base"
+          style={{ 
               animationDelay: '800ms',
               animationDuration: '1.5s',
               textShadow: '1px 1px 8px rgba(0, 0, 0, 0.95), -1px -1px 8px rgba(0, 0, 0, 0.95)'}}
@@ -310,7 +326,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       {/* CONTAINER DO CARROSSEL - Alterar "gap-6" muda o espaçamento entre os cards */}
       <div className="flex flex-row gap-6 overflow-x-auto pb-6 pt-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent w-full snap-x snap-mandatory animate-[slideLeft_1.5s_ease-out]"> 
       
-       {/* 🌟 LISTA DE MÚSICAS PERSONALIZADA (ARRAY DE OBJETOS) 
+      {/* 🌟 LISTA DE MÚSICAS PERSONALIZADA (ARRAY DE OBJETOS) 
           Altere os textos, links das capas e links das plataformas diretamente aqui abaixo:
       */}
       {[
@@ -378,14 +394,14 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           <div className="flex justify-center items-center gap-3"> 
             
             {/* LINK SPOTIFY */}
-            <a href={musica.linkSpotify} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-emerald-500 hover:scale-110 transition-all cursor-pointer" 
-             fallback-href="https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33">
+            <a href={musica.linkSpotify} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-emerald-500 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all cursor-pointer" 
+            fallback-href="https://open.spotify.com/intl-pt/track/46endSHadmGaO2wuK6Sx3A?si=3a6bf8bb59344c33">
               <img src={iconeSpotify} alt="Spotify" className="w-full h-full0 object-contain rounded-full"/>
             </a> 
 
             {/* LINK YOUTUBE */}
-            <a href={musica.linkYoutube} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-red-500 hover:scale-110 transition-all cursor-pointer" 
-             fallback-href="https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1">
+            <a href={musica.linkYoutube} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-red-500 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all cursor-pointer" 
+            fallback-href="https://www.youtube.com/watch?v=2LYxT4AiRcg&list=RD2LYxT4AiRcg&start_radio=1">
               <img src={iconeYouTube} alt="YouTube" className="w-full h-full object-contain rounded-full"/>
             </a> 
 
@@ -423,7 +439,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
         <div className="space-y-4">
          <button 
           onClick={() => setGavetaDisponiveis(!gavetaDisponiveis)}
-          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-cyan-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
         >
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00ffff]"></span>
@@ -480,8 +496,8 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
                         }
                         audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
                       }
-                    }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
-                    <a href={`https://wa.me/5511959367015?text=Olá, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 text-xs font-bold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer flex items-center">Tenho Interesse</a>
+                    }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                    <a href={`https://wa.me/5511959367015?text=Olá, tenho interesse no beat "${encodeURIComponent(beat.nome)}"`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 text-xs font-bold bg-slate-800/20 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black text-white rounded-lg transition-colors cursor-pointer flex items-center">Tenho Interesse</a>
                   </div>
                 </div>
               </div>
@@ -494,7 +510,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
       <div className="space-y-4">
         <button 
           onClick={() => setGavetaUsados(!gavetaUsados)}
-          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-slate-600/50 transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
+          className="w-full flex items-center justify-between p-4 bg-slate-900/60 border border-slate-800/80 rounded-xl hover:bg-slate-800/50 hover:border-slate-600/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-300 backdrop-blur-md cursor-pointer text-left group"
         >
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
@@ -554,7 +570,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
                       }
                       audio.src = beat.arquivo; audio.dataset.beatId = beat.id; audio.load(); audio.play().catch(err => console.log(err)); btn.innerText = "⏸ Pause";
                     }
-                  }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
+                  }} className="px-3 py-1 text-xs font-semibold bg-slate-800/20 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black text-white rounded-lg transition-colors cursor-pointer">▶ Play</button>
                 </div>
               </div>
             ))}
@@ -628,7 +644,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           href={set.linkPlataforma} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-cyan-400 hover:scale-110 transition-all cursor-pointer">
+          className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center border border-slate-800 hover:border-cyan-400 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all cursor-pointer">
           <img src={set.iconePlataforma} alt="Link" className="w-full h-full object-contain rounded-full" />
          </a>
       </div>
@@ -716,7 +732,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
         }} 
-         className="flex flex-col items-center group text-center animar-icone animate-delay-0" 
+        className="flex flex-col items-center group text-center animar-icone animate-delay-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1" 
       > 
         
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-linear-to-tr from-yellow-500 via-red-500 to-purple-600 p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-300"> 
@@ -741,7 +757,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
        window.location.href = appUrl; 
        setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
      }}  
-      className="flex flex-col items-center group text-center animar-icone animate-delay-150"
+      className="flex flex-col items-center group text-center animar-icone animate-delay-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1"
   > 
     <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-slate-800 p-0.5 border border-slate-700 shadow-lg group-hover:scale-110 group-hover:border-cyan-400 transition-transform duration-300"> 
       <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden"> 
@@ -764,7 +780,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
         }} 
-         className="flex flex-col items-center group text-center animar-icone animate-delay-300" 
+        className="flex flex-col items-center group text-center animar-icone animate-delay-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1" 
  
       > 
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-slate-800 p-0.5 border border-slate-700 shadow-lg group-hover:scale-110 group-hover:border-blue-500 transition-transform duration-300"> 
@@ -788,7 +804,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
         }} 
-        className="flex flex-col items-center group text-center animar-icone animate-delay-450" 
+        className="flex flex-col items-center group text-center animar-icone animate-delay-450 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1" 
       > 
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-slate-800 p-0.5 border border-slate-700 shadow-lg group-hover:scale-110 group-hover:border-blue-500 transition-transform duration-300"> 
           <div className="w-full h-full rounded-full bg-orange-600 flex items-center justify-center overflow-hidden"> 
@@ -811,7 +827,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
         }} 
-        className="col-start-2 flex flex-col items-center group text-center animar-icone animate-delay-600" 
+        className="col-start-2 flex flex-col items-center group text-center animar-icone animate-delay-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1" 
       > 
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-slate-800 p-0.5 border border-slate-700 shadow-lg group-hover:scale-110 group-hover:border-blue-500 transition-transform duration-300"> 
           <div className="w-full h-full rounded-full bg-red-600 flex items-center justify-center overflow-hidden"> 
@@ -834,7 +850,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
           window.location.href = appUrl; 
           setTimeout(() => { window.open(webUrl, '_blank'); }, 500); 
         }}                                                                                  //Quando quiser reativar o WhatsApp, basta remover "pointer-events-none opacity-00"
-        className="flex flex-col items-center group text-center animar-icone animate-delay-750 pointer-events-none opacity-00" 
+        className="flex flex-col items-center group text-center animar-icone animate-delay-750 pointer-events-none opacity-00 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-xl p-1" 
       > 
         <div className="w-11 h-11 sm:w-20 sm:h-20 rounded-full bg-emerald-500 p-0.5 shadow-lg group-hover:scale-110 transition-transform duration-300 "> 
           <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden"> 
@@ -861,7 +877,7 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
             {/* Botão de fechar no canto superior */}
             <button 
               onClick={() => setMidiaGaleriaAtiva(null)}
-              className="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors z-10 cursor-pointer"
+              className="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors z-10 cursor-pointer"
             >
               ✕
             </button>
@@ -903,14 +919,14 @@ const iconeYouTube = "https://ueteknuignkvidrbyynx.supabase.co/storage/v1/object
                   setAceitouCookies(true);
                   console.log("Mídia liberada!");
                 }}
-                className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-6 py-2.5 rounded-md transition-all shadow-lg cursor-pointer"
+                className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black text-white text-xs font-bold px-6 py-2.5 rounded-md transition-all shadow-lg cursor-pointer"
               >
                 Aceitar Todos
               </button>
               
               <button 
                 onClick={() => setAceitouCookies(true)}
-                className="flex-1 sm:flex-none bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2.5 rounded-md transition-all cursor-pointer"
+                className="flex-1 sm:flex-none bg-slate-800 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black text-slate-300 text-xs font-semibold px-4 py-2.5 rounded-md transition-all cursor-pointer"
               >
                 Configurar
               </button>
